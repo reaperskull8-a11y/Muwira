@@ -93,6 +93,8 @@
     font-weight: 600; font-size: .82rem; text-decoration: none;
     letter-spacing: .04em;
     transition: background .2s, transform .15s;
+    cursor: pointer;
+    border: none;
   }
   .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
 
@@ -105,7 +107,7 @@
   }
   .hero-noise {
     position: absolute; inset: 0; z-index: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'[...]
     background-size: 200px;
     opacity: .4;
   }
@@ -186,6 +188,9 @@
     font-weight: 700; font-size: .9rem; text-decoration: none;
     letter-spacing: .04em; display: inline-flex; align-items: center; gap: 8px;
     transition: all .2s;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
   }
   .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(240,180,41,0.2); }
   .btn-ghost {
@@ -193,6 +198,10 @@
     display: inline-flex; align-items: center; gap: 8px;
     padding: 14px 20px;
     transition: color .2s;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
   }
   .btn-ghost:hover { color: var(--white); }
   .btn-ghost .arrow { transition: transform .2s; }
@@ -534,6 +543,102 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* MODAL FORM */
+  .modal-overlay {
+    display: none;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    justify-content: center; align-items: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+
+  .modal-content {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 48px;
+    max-width: 500px; width: 100%;
+    position: relative;
+    animation: slideUp .3s ease;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; }
+  .modal-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem; font-weight: 800;
+    color: var(--white);
+  }
+  .modal-close {
+    background: none; border: none;
+    color: var(--muted); font-size: 1.6rem;
+    cursor: pointer; transition: color .2s;
+    width: 32px; height: 32px; display: flex;
+    align-items: center; justify-content: center;
+  }
+  .modal-close:hover { color: var(--white); }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+  .form-group label {
+    display: block; margin-bottom: 8px;
+    font-size: .85rem; color: var(--white);
+    font-weight: 600; letter-spacing: .03em;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    color: var(--white);
+    font-family: inherit;
+    font-size: .9rem;
+    transition: border-color .2s, background .2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(240,180,41,0.05);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-actions {
+    display: flex; gap: 12px; margin-top: 32px;
+  }
+  .form-actions button {
+    flex: 1;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: .85rem;
+    letter-spacing: .04em;
+    border: none;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: inherit;
+  }
+  .btn-submit {
+    background: var(--gold); color: var(--black);
+  }
+  .btn-submit:hover { background: var(--gold2); transform: translateY(-2px); }
+  .btn-cancel {
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .btn-cancel:hover { color: var(--white); border-color: var(--gold); }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
@@ -552,6 +657,7 @@
     .hero-meta { gap: 32px; flex-wrap: wrap; }
     body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
+    .modal-content { padding: 32px; margin: 20px; }
   }
 </style>
 </head>
@@ -559,6 +665,53 @@
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MODAL FORM -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Pesan POS Pro</h2>
+      <button class="modal-close" id="closeModalBtn">&times;</button>
+    </div>
+    <form id="orderForm">
+      <div class="form-group">
+        <label for="name">Nama Lengkap *</label>
+        <input type="text" id="name" name="name" required placeholder="Nama bisnis atau pemilik">
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required placeholder="nama@email.com">
+      </div>
+      <div class="form-group">
+        <label for="phone">Nomor Telepon *</label>
+        <input type="tel" id="phone" name="phone" required placeholder="081234567890">
+      </div>
+      <div class="form-group">
+        <label for="business">Jenis Bisnis *</label>
+        <select id="business" name="business" required>
+          <option value="">Pilih jenis bisnis...</option>
+          <option value="retail">Retail / Toko</option>
+          <option value="cafe">Kafe / Restoran</option>
+          <option value="bakery">Bakery / Pastry</option>
+          <option value="pharmacy">Apotek</option>
+          <option value="salon">Salon / Barbershop</option>
+          <option value="clothing">Butik / Fashion</option>
+          <option value="electronics">Elektronik</option>
+          <option value="grocery">Toko Kelontong</option>
+          <option value="other">Lainnya</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Pesan / Pertanyaan</label>
+        <textarea id="message" name="message" placeholder="Ceritakan kebutuhan Anda..."></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" id="cancelBtn">Batal</button>
+        <button type="submit" class="btn-submit">Kirim Pesanan</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -574,7 +727,7 @@
   </ul>
   <div class="nav-right">
     <span class="nav-tag">Build simple. Grow endlessly.</span>
-    <a href="#cta" class="nav-cta">Mulai Sekarang →</a>
+    <button class="nav-cta" id="navCtaBtn">Mulai Sekarang →</button>
   </div>
 </nav>
 
@@ -597,7 +750,7 @@
     </h1>
     <p class="hero-sub">Kelola transaksi, stok, laporan, dan promo toko Anda dalam satu platform offline yang cepat, stabil, dan mudah digunakan siapa pun.</p>
     <div class="hero-actions">
-      <a href="#cta" class="btn-gold">🚀 Coba POS Pro Sekarang</a>
+      <button class="btn-gold" id="heroCbtn">🚀 Coba POS Pro Sekarang</button>
       <a href="#fitur" class="btn-ghost">Lihat semua fitur <span class="arrow">→</span></a>
     </div>
     <div class="hero-meta">
@@ -657,7 +810,7 @@
       <div class="prod-num">01 / Andalan</div>
       <div class="prod-icon yellow">🟡</div>
       <h3>POS Pro</h3>
-      <p>Sistem kasir desktop offline lengkap untuk mengelola transaksi harian, stok inventaris, laporan omzet & laba, kode promo, dan operasional toko secara efisien. Dirancang untuk UMKM dan bisnis retail lokal.</p>
+      <p>Sistem kasir desktop offline lengkap untuk mengelola transaksi harian, stok inventaris, laporan omzet & laba, kode promo, dan operasional toko secara efisien. Dirancang untuk UMKM dan bisnis [...]
       <span class="prod-tag highlight">Tersedia Sekarang</span>
       <span class="prod-arrow">↗</span>
     </div>
@@ -694,7 +847,7 @@
       </div>
       <div>
         <h4>POS Kasir Real-time</h4>
-        <p>Proses transaksi dengan cepat. Cari produk, tambah ke keranjang, terapkan promo, pilih metode pembayaran — Tunai, QRIS, Transfer Bank, atau Debit/Kredit — dan selesaikan dalam hitungan detik.</p>
+        <p>Proses transaksi dengan cepat. Cari produk, tambah ke keranjang, terapkan promo, pilih metode pembayaran — Tunai, QRIS, Transfer Bank, atau Debit/Kredit — dan selesaikan dalam hitungan [...]
       </div>
     </div>
     <div class="feat-small-col">
@@ -816,8 +969,8 @@
       </div>
     </div>
     <div class="about-right reveal" style="transition-delay:.15s">
-      <p>Muwira adalah pengembang software yang berfokus pada solusi digital praktis, ringan, dan dapat berkembang sesuai kebutuhan pengguna. Kami percaya bahwa teknologi tidak harus rumit untuk memberikan dampak besar.</p>
-      <p>Dimulai dari kebutuhan nyata di lapangan, Muwira membangun produk yang mengutamakan kemudahan penggunaan, stabilitas, dan fleksibilitas. Setiap produk dirancang bukan hanya untuk dipakai hari ini, tetapi juga untuk terus berkembang seiring pertumbuhan penggunanya.</p>
+      <p>Muwira adalah pengembang software yang berfokus pada solusi digital praktis, ringan, dan dapat berkembang sesuai kebutuhan pengguna. Kami percaya bahwa teknologi tidak harus rumit untuk [...]
+      <p>Dimulai dari kebutuhan nyata di lapangan, Muwira membangun produk yang mengutamakan kemudahan penggunaan, stabilitas, dan fleksibilitas. Setiap produk dirancang bukan hanya untuk dipakai[...]
       <ul class="mission-list">
         <li>Mengembangkan software yang ringan dan mudah digunakan</li>
         <li>Membuat solusi yang berangkat dari kebutuhan nyata pengguna</li>
@@ -836,7 +989,7 @@
     <h2>Siap mulai dengan<br><span>POS Pro?</span></h2>
     <p>Bergabung dengan bisnis yang sudah lebih rapi, efisien, dan mudah dikelola bersama Muwira.</p>
     <div class="cta-btns">
-      <a href="#" class="btn-gold">🚀 Mulai Gunakan POS Pro</a>
+      <button class="btn-gold" id="ctaBtn">🚀 Mulai Gunakan POS Pro</button>
       <a href="#" class="btn-ghost">Hubungi Kami <span class="arrow">→</span></a>
     </div>
   </div>
@@ -874,6 +1027,43 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Modal Form
+  const orderModal = document.getElementById('orderModal');
+  const navCtaBtn = document.getElementById('navCtaBtn');
+  const heroCbtn = document.getElementById('heroCbtn');
+  const ctaBtn = document.getElementById('ctaBtn');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const orderForm = document.getElementById('orderForm');
+
+  function openModal() {
+    orderModal.classList.add('active');
+  }
+
+  function closeModal() {
+    orderModal.classList.remove('active');
+  }
+
+  navCtaBtn.addEventListener('click', openModal);
+  heroCbtn.addEventListener('click', openModal);
+  ctaBtn.addEventListener('click', openModal);
+  closeModalBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+
+  orderModal.addEventListener('click', (e) => {
+    if (e.target === orderModal) closeModal();
+  });
+
+  orderForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(orderForm);
+    const data = Object.fromEntries(formData);
+    console.log('Form submitted:', data);
+    alert('Terima kasih! Pesanan Anda telah dikirim. Kami akan menghubungi Anda segera.');
+    orderForm.reset();
+    closeModal();
+  });
 </script>
 </body>
 </html>
