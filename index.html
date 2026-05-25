@@ -3,627 +3,877 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>POS Pro — Sistem Kasir Modern untuk Bisnis Anda</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>POS Pro by Muwira — Unlimited Creation</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #E8A020;
-    --gold-light: #F5C05A;
-    --dark: #1A2E25;
-    --dark2: #0F1F18;
-    --mid: #2C4A38;
-    --cream: #F5F0E8;
-    --cream2: #EDE8DC;
-    --green: #3D6B50;
-    --text: #1A2E25;
-    --muted: #6B8070;
+    --black: #080C0A;
+    --dark: #0E1612;
+    --mid: #162118;
+    --panel: #1B2820;
+    --gold: #F0B429;
+    --gold2: #FFCF5C;
+    --blue: #3B82F6;
+    --green: #22C55E;
+    --white: #F5F7F5;
+    --muted: #6B7F70;
+    --border: rgba(255,255,255,0.07);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--black);
+    color: var(--white);
     overflow-x: hidden;
+    cursor: none;
   }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed; z-index: 9999;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform .1s, width .2s, height .2s, background .2s;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid rgba(240,180,41,0.4);
+    border-radius: 50%;
+    position: fixed; z-index: 9998;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform .15s ease, width .25s, height .25s, border-color .25s;
+  }
+  body:hover .cursor { opacity: 1; }
 
   /* NAV */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    padding: 20px 64px;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 60px;
-    background: rgba(10, 20, 14, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(232,160,32,0.15);
+    border-bottom: 1px solid var(--border);
+    background: rgba(8,12,10,0.85);
+    backdrop-filter: blur(20px);
   }
-  .nav-logo {
-    display: flex; align-items: center; gap: 10px;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem; font-weight: 700; color: #fff;
+  .nav-brand {
+    display: flex; flex-direction: column; gap: 0;
+    text-decoration: none;
   }
-  .nav-logo .badge {
-    background: var(--gold); color: #fff;
-    padding: 4px 10px; border-radius: 8px;
-    font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: .85rem;
+  .nav-brand .brand-main {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.15rem;
+    letter-spacing: .08em; color: var(--white);
   }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: .9rem; transition: color .2s; }
-  .nav-links a:hover { color: var(--gold); }
+  .nav-brand .brand-sub {
+    font-size: .65rem; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--gold);
+    font-weight: 500; margin-top: -2px;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: .82rem; color: var(--muted); text-decoration: none;
+    letter-spacing: .04em; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-tag {
+    font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); padding: 5px 12px;
+    border: 1px solid var(--border); border-radius: 100px;
+  }
   .nav-cta {
-    background: var(--gold); color: #fff;
-    padding: 10px 24px; border-radius: 100px;
-    font-weight: 600; font-size: .9rem; text-decoration: none;
-    transition: background .2s, transform .2s;
+    background: var(--gold); color: var(--black);
+    padding: 9px 22px; border-radius: 6px;
+    font-weight: 600; font-size: .82rem; text-decoration: none;
+    letter-spacing: .04em;
+    transition: background .2s, transform .15s;
   }
-  .nav-cta:hover { background: var(--gold-light); transform: scale(1.03); }
+  .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
 
   /* HERO */
   .hero {
     min-height: 100vh;
-    background: var(--dark2);
-    display: grid; place-items: center;
-    position: relative; overflow: hidden;
-    padding: 120px 60px 80px;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(61,107,80,0.35) 0%, transparent 65%),
-                radial-gradient(ellipse 50% 40% at 20% 80%, rgba(232,160,32,0.12) 0%, transparent 55%);
-  }
-  .hero-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center;
-    max-width: 1200px; width: 100%; position: relative; z-index: 2;
-  }
-  .hero-tag {
-    display: inline-block;
-    background: rgba(232,160,32,0.15); border: 1px solid rgba(232,160,32,0.35);
-    color: var(--gold); padding: 6px 16px; border-radius: 100px;
-    font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-    margin-bottom: 24px;
-    animation: fadeUp .6s ease both;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 4vw, 3.8rem);
-    font-weight: 900; line-height: 1.1;
-    color: #fff; margin-bottom: 22px;
-    animation: fadeUp .6s .1s ease both;
-  }
-  .hero h1 em { color: var(--gold); font-style: normal; }
-  .hero p {
-    color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.7;
-    max-width: 460px; margin-bottom: 36px;
-    animation: fadeUp .6s .2s ease both;
-  }
-  .hero-btns {
-    display: flex; gap: 14px; flex-wrap: wrap;
-    animation: fadeUp .6s .3s ease both;
-  }
-  .btn-primary {
-    background: var(--gold); color: #fff;
-    padding: 14px 32px; border-radius: 100px;
-    font-weight: 600; font-size: 1rem; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: all .25s;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,160,32,0.3); }
-  .btn-outline {
-    border: 1.5px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.85);
-    padding: 14px 32px; border-radius: 100px;
-    font-weight: 500; font-size: 1rem; text-decoration: none;
-    transition: all .25s;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-  .hero-stats {
-    display: flex; gap: 32px; margin-top: 48px;
-    animation: fadeUp .6s .4s ease both;
-  }
-  .stat { border-left: 2px solid rgba(232,160,32,0.4); padding-left: 16px; }
-  .stat strong { display: block; color: #fff; font-size: 1.5rem; font-weight: 700; }
-  .stat span { color: rgba(255,255,255,0.5); font-size: .8rem; }
-
-  /* MOCKUP PANEL */
-  .hero-visual { animation: fadeUp .7s .2s ease both; }
-  .mockup-wrap {
-    background: var(--dark);
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
-    overflow: hidden;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(232,160,32,0.1);
-  }
-  .mockup-bar {
-    background: var(--dark2);
-    padding: 10px 16px;
-    display: flex; align-items: center; gap: 8px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
-  .dot-r { background: #FF5F57; }
-  .dot-y { background: #FEBC2E; }
-  .dot-g { background: #28C840; }
-  .mockup-screen {
-    padding: 20px 18px;
-    background: linear-gradient(135deg, #1a3025 0%, #0f1f18 100%);
-    min-height: 280px;
-  }
-  .mock-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 16px;
-  }
-  .mock-title { color: #fff; font-weight: 600; font-size: .9rem; }
-  .mock-badge { background: var(--gold); color: #fff; padding: 3px 10px; border-radius: 100px; font-size: .7rem; font-weight: 600; }
-  .mock-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-  .mock-card {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 10px; padding: 12px;
-    transition: background .2s;
-  }
-  .mock-card:hover { background: rgba(255,255,255,0.1); }
-  .mock-card .mc-icon { font-size: 1.4rem; margin-bottom: 6px; }
-  .mock-card .mc-name { color: rgba(255,255,255,0.9); font-size: .75rem; font-weight: 600; }
-  .mock-card .mc-price { color: var(--gold); font-size: .75rem; font-weight: 600; }
-  .mock-card .mc-stok { color: rgba(255,255,255,0.4); font-size: .65rem; }
-  .mock-summary {
-    background: rgba(232,160,32,0.12); border: 1px solid rgba(232,160,32,0.2);
-    border-radius: 10px; padding: 12px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .ms-label { color: rgba(255,255,255,0.6); font-size: .75rem; }
-  .ms-val { color: #fff; font-size: 1.1rem; font-weight: 700; }
-  .ms-btn {
-    background: var(--gold); color: #fff;
-    padding: 7px 16px; border-radius: 100px;
-    font-size: .75rem; font-weight: 600; cursor: pointer;
-    border: none;
-  }
-
-  /* FEATURES */
-  .features {
-    padding: 100px 60px;
-    background: var(--cream);
-  }
-  .section-label {
-    text-align: center;
-    display: block;
-    color: var(--green); font-weight: 600; font-size: .8rem;
-    letter-spacing: .1em; text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 3vw, 3rem);
-    font-weight: 700; text-align: center;
-    color: var(--dark); max-width: 600px;
-    margin: 0 auto 16px; line-height: 1.2;
-  }
-  .section-sub {
-    text-align: center; color: var(--muted);
-    max-width: 500px; margin: 0 auto 64px;
-    font-size: 1rem; line-height: 1.6;
-  }
-  .feat-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 28px; max-width: 1100px; margin: 0 auto;
-  }
-  .feat-card {
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.07);
-    border-radius: 20px; padding: 36px 30px;
-    transition: all .3s;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 64px 80px;
     position: relative; overflow: hidden;
   }
-  .feat-card::before {
-    content: ''; position: absolute;
-    top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--green));
-    transform: scaleX(0); transform-origin: left;
-    transition: transform .3s;
+  .hero-noise {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+    background-size: 200px;
+    opacity: .4;
   }
-  .feat-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-  .feat-card:hover::before { transform: scaleX(1); }
-  .feat-icon {
-    width: 54px; height: 54px; border-radius: 14px;
-    background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; margin-bottom: 20px;
-  }
-  .feat-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem; font-weight: 700;
-    color: var(--dark); margin-bottom: 10px;
-  }
-  .feat-card p { color: var(--muted); font-size: .9rem; line-height: 1.6; }
-
-  /* HOW IT WORKS */
-  .how {
-    padding: 100px 60px;
-    background: var(--dark2);
-    position: relative; overflow: hidden;
-  }
-  .how::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(61,107,80,0.2) 0%, transparent 70%);
-  }
-  .how .section-title { color: #fff; }
-  .how .section-label { color: var(--gold); }
-  .how .section-sub { color: rgba(255,255,255,0.5); }
-  .steps {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 0; max-width: 1000px; margin: 0 auto;
-    position: relative; z-index: 2;
-  }
-  .steps::before {
-    content: '';
-    position: absolute; top: 28px; left: 12.5%; right: 12.5%; height: 2px;
-    background: linear-gradient(90deg, var(--gold) 0%, rgba(232,160,32,0.2) 100%);
+  .hero-glow {
+    position: absolute;
+    top: -200px; right: -100px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(240,180,41,0.06) 0%, transparent 65%);
     z-index: 0;
   }
-  .step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
-  .step-num {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: var(--gold); color: #fff;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-    box-shadow: 0 0 0 6px rgba(232,160,32,0.15);
+  .hero-glow2 {
+    position: absolute;
+    bottom: -100px; left: 30%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(34,197,94,0.05) 0%, transparent 65%);
+    z-index: 0;
   }
-  .step h4 { color: #fff; font-weight: 600; margin-bottom: 8px; font-size: .95rem; }
-  .step p { color: rgba(255,255,255,0.45); font-size: .82rem; line-height: 1.5; }
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 1200px;
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 32px;
+    animation: slideIn .7s ease both;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; transform: scale(1); }
+    50% { opacity:.5; transform: scale(1.4); }
+  }
+  .eyebrow-text {
+    font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600;
+  }
+  .eyebrow-sep { width: 40px; height: 1px; background: rgba(240,180,41,0.3); }
+  .eyebrow-brand {
+    font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6.5vw, 7rem);
+    font-weight: 800; line-height: .95;
+    letter-spacing: -.02em;
+    margin-bottom: 0;
+    animation: slideIn .7s .1s ease both;
+  }
+  .hero h1 .line1 { display: block; color: var(--white); }
+  .hero h1 .line2 {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.25);
+  }
+  .hero h1 .line3 {
+    display: block;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .hero-sub {
+    max-width: 520px; margin-top: 36px;
+    color: var(--muted); font-size: 1rem; line-height: 1.75;
+    animation: slideIn .7s .2s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 14px; margin-top: 44px; align-items: center;
+    animation: slideIn .7s .3s ease both;
+  }
+  .btn-gold {
+    background: var(--gold); color: var(--black);
+    padding: 14px 32px; border-radius: 6px;
+    font-weight: 700; font-size: .9rem; text-decoration: none;
+    letter-spacing: .04em; display: inline-flex; align-items: center; gap: 8px;
+    transition: all .2s;
+  }
+  .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(240,180,41,0.2); }
+  .btn-ghost {
+    color: var(--muted); font-size: .85rem; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 20px;
+    transition: color .2s;
+  }
+  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost .arrow { transition: transform .2s; }
+  .btn-ghost:hover .arrow { transform: translateX(4px); }
+
+  .hero-meta {
+    display: flex; gap: 48px; margin-top: 64px;
+    padding-top: 40px; border-top: 1px solid var(--border);
+    animation: slideIn .7s .4s ease both;
+  }
+  .meta-item { }
+  .meta-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem; font-weight: 800; color: var(--white);
+    letter-spacing: -.02em;
+  }
+  .meta-val span { color: var(--gold); }
+  .meta-label { font-size: .75rem; color: var(--muted); letter-spacing: .06em; margin-top: 4px; }
+
+  /* MARQUEE */
+  .marquee-section {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden; padding: 18px 0;
+    background: var(--dark);
+  }
+  .marquee-track {
+    display: flex; gap: 0;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    display: inline-flex; align-items: center; gap: 16px;
+    padding: 0 40px;
+    font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .marquee-item .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* PRODUCTS */
+  .products {
+    padding: 120px 64px;
+    background: var(--dark);
+    position: relative;
+  }
+  .section-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 64px;
+  }
+  .section-label {
+    font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px; display: block;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 800; line-height: 1.1; letter-spacing: -.02em;
+    color: var(--white);
+  }
+  .section-title em { color: var(--gold); font-style: normal; }
+  .section-note { color: var(--muted); font-size: .85rem; max-width: 280px; text-align: right; line-height: 1.6; }
+  .products-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2px; }
+  .prod-card {
+    background: var(--panel);
+    padding: 44px 40px;
+    border: 1px solid var(--border);
+    position: relative; overflow: hidden;
+    transition: background .3s;
+  }
+  .prod-card:hover { background: rgba(240,180,41,0.04); }
+  .prod-card.featured { grid-row: span 1; }
+  .prod-num {
+    font-family: 'Syne', sans-serif;
+    font-size: .7rem; letter-spacing: .12em;
+    color: var(--muted); margin-bottom: 48px;
+  }
+  .prod-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 24px;
+  }
+  .prod-icon.yellow { background: rgba(240,180,41,0.15); }
+  .prod-icon.blue { background: rgba(59,130,246,0.15); }
+  .prod-icon.green { background: rgba(34,197,94,0.12); }
+  .prod-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 700; color: var(--white);
+    margin-bottom: 10px; letter-spacing: -.01em;
+  }
+  .prod-card p { color: var(--muted); font-size: .85rem; line-height: 1.65; margin-bottom: 32px; }
+  .prod-tag {
+    display: inline-block;
+    border: 1px solid var(--border);
+    color: var(--muted); font-size: .7rem;
+    padding: 4px 12px; border-radius: 100px; letter-spacing: .06em;
+  }
+  .prod-tag.highlight { border-color: rgba(240,180,41,0.3); color: var(--gold); background: rgba(240,180,41,0.06); }
+  .prod-arrow {
+    position: absolute; top: 40px; right: 40px;
+    color: var(--muted); font-size: 1.1rem;
+    transition: transform .2s, color .2s;
+  }
+  .prod-card:hover .prod-arrow { transform: translate(3px,-3px); color: var(--gold); }
+
+  /* FEATURES (POS PRO) */
+  .features {
+    padding: 120px 64px;
+    background: var(--black);
+  }
+  .features-intro { max-width: 600px; margin-bottom: 80px; }
+  .features-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .feat-big {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 56px 52px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    min-height: 320px;
+    transition: background .3s;
+    position: relative; overflow: hidden;
+  }
+  .feat-big::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .4s;
+  }
+  .feat-big:hover { background: rgba(240,180,41,0.03); }
+  .feat-big:hover::after { transform: scaleX(1); }
+  .feat-top { display: flex; align-items: flex-start; justify-content: space-between; }
+  .feat-icon2 {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: rgba(240,180,41,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .feat-num2 {
+    font-family: 'Syne', sans-serif;
+    font-size: .65rem; letter-spacing: .14em; color: var(--muted);
+  }
+  .feat-big h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem; font-weight: 700;
+    color: var(--white); margin-bottom: 12px; letter-spacing: -.01em;
+    margin-top: 32px;
+  }
+  .feat-big p { color: var(--muted); font-size: .88rem; line-height: 1.65; }
+  .feat-small-col { display: flex; flex-direction: column; gap: 2px; }
+  .feat-small {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 36px 40px; flex: 1;
+    transition: background .3s;
+  }
+  .feat-small:hover { background: rgba(240,180,41,0.03); }
+  .feat-small .feat-icon2 { margin-bottom: 24px; }
+  .feat-small h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700; color: var(--white);
+    margin-bottom: 8px;
+  }
+  .feat-small p { color: var(--muted); font-size: .82rem; line-height: 1.6; }
 
   /* ROLES */
   .roles {
-    padding: 100px 60px;
-    background: var(--cream2);
+    padding: 120px 64px;
+    background: var(--dark);
   }
   .roles-grid {
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 28px; max-width: 860px; margin: 0 auto;
+    gap: 2px; margin-top: 64px;
   }
   .role-card {
-    border-radius: 24px; padding: 44px 40px;
+    padding: 56px 52px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .role-card.r-admin { background: var(--panel); }
+  .role-card.r-kasir { background: rgba(240,180,41,0.03); border-color: rgba(240,180,41,0.15); }
+  .role-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-bottom: 36px;
+  }
+  .role-ava {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: .85rem;
+  }
+  .r-admin .role-ava { background: var(--gold); color: var(--black); }
+  .r-kasir .role-ava { background: var(--mid); color: var(--white); border: 1px solid rgba(240,180,41,0.3); }
+  .role-badge-label { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .role-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem; font-weight: 800;
+    letter-spacing: -.02em; color: var(--white); margin-bottom: 10px;
+  }
+  .role-desc { color: var(--muted); font-size: .88rem; line-height: 1.6; margin-bottom: 36px; }
+  .role-perks { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .role-perks li {
+    display: flex; align-items: center; gap: 12px;
+    font-size: .85rem; color: rgba(245,247,245,0.7);
+  }
+  .perk-check {
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .6rem; flex-shrink: 0;
+  }
+  .r-admin .perk-check { background: rgba(240,180,41,0.15); color: var(--gold); }
+  .r-kasir .perk-check { background: rgba(34,197,94,0.12); color: var(--green); }
+
+  /* VALUES */
+  .values {
+    padding: 120px 64px;
+    background: var(--black);
     position: relative; overflow: hidden;
   }
-  .role-card.admin {
-    background: var(--dark);
-    border: 1px solid rgba(232,160,32,0.2);
+  .values::before {
+    content: 'MUWIRA';
+    position: absolute; left: -20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Syne', sans-serif;
+    font-size: 22vw; font-weight: 800;
+    color: rgba(255,255,255,0.02);
+    letter-spacing: -.04em; pointer-events: none;
+    white-space: nowrap;
   }
-  .role-card.kasir {
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.08);
+  .values-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px; margin-top: 64px;
   }
-  .role-avatar {
-    width: 56px; height: 56px; border-radius: 16px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 1.2rem; margin-bottom: 20px;
+  .value-card {
+    border: 1px solid var(--border);
+    padding: 44px 36px;
+    background: var(--panel);
+    transition: all .3s;
+    position: relative; z-index: 2;
   }
-  .admin .role-avatar { background: var(--gold); color: #fff; }
-  .kasir .role-avatar { background: var(--dark); color: #fff; }
-  .role-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; font-weight: 700; margin-bottom: 8px;
+  .value-card:hover { background: rgba(240,180,41,0.04); border-color: rgba(240,180,41,0.2); }
+  .value-no {
+    font-family: 'Syne', sans-serif;
+    font-size: .65rem; letter-spacing: .14em; color: var(--muted);
+    margin-bottom: 36px; display: block;
   }
-  .admin h3 { color: #fff; }
-  .kasir h3 { color: var(--dark); }
-  .role-card .role-sub { font-size: .85rem; margin-bottom: 24px; }
-  .admin .role-sub { color: rgba(255,255,255,0.45); }
-  .kasir .role-sub { color: var(--muted); }
-  .role-perks { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .role-perks li {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: .88rem;
+  .value-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--white);
+    margin-bottom: 12px;
   }
-  .admin .role-perks li { color: rgba(255,255,255,0.75); }
-  .kasir .role-perks li { color: var(--text); }
-  .perk-dot {
-    width: 18px; height: 18px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: .65rem; flex-shrink: 0; margin-top: 1px;
-  }
-  .admin .perk-dot { background: rgba(232,160,32,0.2); color: var(--gold); }
-  .kasir .perk-dot { background: rgba(26,46,37,0.1); color: var(--dark); }
+  .value-card p { color: var(--muted); font-size: .82rem; line-height: 1.6; }
 
-  /* TESTIMONIAL */
-  .testimonials {
-    padding: 100px 60px;
+  /* ABOUT */
+  .about {
+    padding: 120px 64px;
     background: var(--dark);
   }
-  .testi-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #fff; text-align: center; margin-bottom: 48px; }
-  .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
-  .testi-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px; padding: 28px;
+  .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .about-left {}
+  .about-left .section-title { max-width: 500px; margin-top: 16px; }
+  .about-quote {
+    margin-top: 48px; padding: 32px 36px;
+    background: rgba(240,180,41,0.06);
+    border-left: 3px solid var(--gold);
   }
-  .testi-stars { color: var(--gold); font-size: .85rem; margin-bottom: 14px; letter-spacing: 2px; }
-  .testi-text { color: rgba(255,255,255,0.7); font-size: .88rem; line-height: 1.65; margin-bottom: 20px; font-style: italic; }
-  .testi-user { display: flex; align-items: center; gap: 12px; }
-  .testi-ava {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: var(--mid); color: var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: .8rem;
+  .about-quote p {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 700; color: var(--white);
+    line-height: 1.4; letter-spacing: -.01em;
   }
-  .testi-name { color: #fff; font-weight: 600; font-size: .85rem; }
-  .testi-role { color: rgba(255,255,255,0.35); font-size: .75rem; }
+  .about-quote cite { display: block; color: var(--gold); font-size: .75rem; letter-spacing: .1em; margin-top: 12px; font-style: normal; }
+  .about-right {}
+  .about-right p { color: var(--muted); font-size: .92rem; line-height: 1.8; margin-bottom: 24px; }
+  .mission-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .mission-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: .88rem; color: rgba(245,247,245,0.7);
+    line-height: 1.55;
+  }
+  .mission-list li::before {
+    content: '✓';
+    color: var(--gold); font-weight: 600; font-size: .8rem;
+    flex-shrink: 0; margin-top: 2px;
+  }
 
   /* CTA */
-  .cta-section {
-    padding: 100px 60px;
-    background: var(--cream);
-    text-align: center;
-  }
-  .cta-box {
-    max-width: 700px; margin: 0 auto;
-    background: var(--dark2);
-    border-radius: 28px; padding: 70px 60px;
+  .cta {
+    padding: 120px 64px;
+    background: var(--black);
     position: relative; overflow: hidden;
-    border: 1px solid rgba(232,160,32,0.2);
   }
-  .cta-box::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(232,160,32,0.08) 0%, transparent 70%);
+  .cta-inner {
+    max-width: 800px; margin: 0 auto; text-align: center;
+    position: relative; z-index: 2;
   }
-  .cta-box h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem; font-weight: 900;
-    color: #fff; margin-bottom: 16px;
-    position: relative; z-index: 1;
+  .cta-glow {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(240,180,41,0.08) 0%, transparent 70%);
+    z-index: 1;
   }
-  .cta-box p {
-    color: rgba(255,255,255,0.55); font-size: 1rem; line-height: 1.6;
-    max-width: 460px; margin: 0 auto 36px;
-    position: relative; z-index: 1;
+  .cta h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 800; line-height: .95;
+    letter-spacing: -.03em; color: var(--white);
+    margin-bottom: 24px;
   }
-  .cta-box .btn-primary { font-size: 1.05rem; padding: 16px 40px; position: relative; z-index: 1; }
-  .cta-note { color: rgba(255,255,255,0.3); font-size: .8rem; margin-top: 16px; position: relative; z-index: 1; }
+  .cta h2 span { color: var(--gold); }
+  .cta p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 460px; margin: 0 auto 48px; }
+  .cta-btns { display: flex; gap: 14px; justify-content: center; }
 
   /* FOOTER */
   footer {
-    background: var(--dark2);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 40px 60px;
-    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding: 40px 64px;
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 24px;
+    background: var(--dark);
   }
-  .footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem; font-weight: 700; color: #fff;
+  .footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-size: .9rem; font-weight: 800;
+    letter-spacing: .08em; color: var(--white);
   }
-  footer p { color: rgba(255,255,255,0.3); font-size: .8rem; }
+  .footer-brand span { color: var(--gold); }
+  .footer-center { text-align: center; color: var(--muted); font-size: .75rem; line-height: 1.6; }
+  .footer-right { text-align: right; color: var(--muted); font-size: .75rem; }
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity .6s ease, transform .6s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
+  /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .hero { padding: 100px 24px 60px; }
-    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-    .features, .how, .roles, .testimonials, .cta-section { padding: 70px 24px; }
-    .feat-grid { grid-template-columns: 1fr; }
-    .steps { grid-template-columns: 1fr 1fr; }
-    .steps::before { display: none; }
+    .nav-links, .nav-tag { display: none; }
+    .hero, .products, .features, .roles, .values, .about, .cta { padding: 80px 24px; }
+    .hero h1 { font-size: 3.2rem; }
+    .products-grid { grid-template-columns: 1fr; }
+    .features-layout { grid-template-columns: 1fr; }
     .roles-grid { grid-template-columns: 1fr; }
-    .testi-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 12px; text-align: center; }
-    .cta-box { padding: 50px 28px; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .about-layout { grid-template-columns: 1fr; gap: 48px; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .section-note { text-align: left; }
+    footer { grid-template-columns: 1fr; text-align: center; padding: 32px 24px; }
+    .footer-right { text-align: center; }
+    .hero-meta { gap: 32px; flex-wrap: wrap; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
   }
 </style>
 </head>
 <body>
 
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">
-    <span class="badge">POS</span> POS Pro
-  </div>
+  <a href="#" class="nav-brand">
+    <span class="brand-main">MUWIRA</span>
+    <span class="brand-sub">Unlimited Creation</span>
+  </a>
   <ul class="nav-links">
-    <li><a href="#fitur">Fitur</a></li>
-    <li><a href="#cara-kerja">Cara Kerja</a></li>
-    <li><a href="#role">Role</a></li>
-    <li><a href="#testimoni">Testimoni</a></li>
+    <li><a href="#produk">Produk</a></li>
+    <li><a href="#fitur">Fitur POS</a></li>
+    <li><a href="#nilai">Nilai</a></li>
+    <li><a href="#tentang">Tentang</a></li>
   </ul>
-  <a href="#cta" class="nav-cta">Coba Gratis →</a>
+  <div class="nav-right">
+    <span class="nav-tag">Build simple. Grow endlessly.</span>
+    <a href="#cta" class="nav-cta">Mulai Sekarang →</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid">
-    <div class="hero-text">
-      <span class="hero-tag">✦ Sistem Kasir Modern</span>
-      <h1>Kelola Bisnis Anda Lebih <em>Cepat & Cerdas</em></h1>
-      <p>POS Pro hadir dengan fitur kasir real-time, manajemen stok otomatis, laporan lengkap, dan promo fleksibel — semua dalam satu platform yang mudah digunakan.</p>
-      <div class="hero-btns">
-        <a href="#cta" class="btn-primary">🚀 Mulai Gratis</a>
-        <a href="#fitur" class="btn-outline">Lihat Fitur</a>
+  <div class="hero-noise"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-dot"></div>
+      <span class="eyebrow-text">Muwira · Unlimited Creation</span>
+      <div class="eyebrow-sep"></div>
+      <span class="eyebrow-brand">Software Studio</span>
+    </div>
+    <h1>
+      <span class="line1">Sistem Kasir</span>
+      <span class="line2">yang Ringan,</span>
+      <span class="line3">POS Pro.</span>
+    </h1>
+    <p class="hero-sub">Kelola transaksi, stok, laporan, dan promo toko Anda dalam satu platform offline yang cepat, stabil, dan mudah digunakan siapa pun.</p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-gold">🚀 Coba POS Pro Sekarang</a>
+      <a href="#fitur" class="btn-ghost">Lihat semua fitur <span class="arrow">→</span></a>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-val">2<span>+</span></div>
+        <div class="meta-label">Role Pengguna</div>
       </div>
-      <div class="hero-stats">
-        <div class="stat"><strong>4+</strong><span>Fitur Utama</span></div>
-        <div class="stat"><strong>2 Role</strong><span>Admin & Kasir</span></div>
-        <div class="stat"><strong>Real-time</strong><span>Laporan Instan</span></div>
+      <div class="meta-item">
+        <div class="meta-val">6<span>+</span></div>
+        <div class="meta-label">Fitur Utama</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">100<span>%</span></div>
+        <div class="meta-label">Offline Capable</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">4<span>×</span></div>
+        <div class="meta-label">Metode Pembayaran</div>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="mockup-wrap">
-        <div class="mockup-bar">
-          <div class="dot dot-r"></div>
-          <div class="dot dot-y"></div>
-          <div class="dot dot-g"></div>
-        </div>
-        <div class="mockup-screen">
-          <div class="mock-header">
-            <span class="mock-title">📦 POS Kasir</span>
-            <span class="mock-badge">Live</span>
-          </div>
-          <div class="mock-grid">
-            <div class="mock-card">
-              <div class="mc-icon">🌾</div>
-              <div class="mc-name">Beras</div>
-              <div class="mc-price">Rp 15.000</div>
-              <div class="mc-stok">Stok: 98 kg</div>
-            </div>
-            <div class="mock-card">
-              <div class="mc-icon">🍬</div>
-              <div class="mc-name">Gula Putih</div>
-              <div class="mc-price">Rp 8.000</div>
-              <div class="mc-stok">Stok: 48 kg</div>
-            </div>
-            <div class="mock-card">
-              <div class="mc-icon">🛢️</div>
-              <div class="mc-name">Minyak Kita</div>
-              <div class="mc-price">Rp 18.000</div>
-              <div class="mc-stok">Stok: 43 ltr</div>
-            </div>
-          </div>
-          <div class="mock-summary">
-            <div>
-              <div class="ms-label">Total Transaksi</div>
-              <div class="ms-val">Rp 2.422.000</div>
-            </div>
-            <button class="ms-btn">💳 Bayar</button>
-          </div>
-        </div>
-      </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="dot"></span>POS Kasir</span>
+    <span class="marquee-item"><span class="dot"></span>Kelola Stok</span>
+    <span class="marquee-item"><span class="dot"></span>Laporan Real-time</span>
+    <span class="marquee-item"><span class="dot"></span>Promo & Diskon</span>
+    <span class="marquee-item"><span class="dot"></span>Ekspor Data</span>
+    <span class="marquee-item"><span class="dot"></span>Multi Role</span>
+    <span class="marquee-item"><span class="dot"></span>Offline Stable</span>
+    <span class="marquee-item"><span class="dot"></span>UMKM Friendly</span>
+    <span class="marquee-item"><span class="dot"></span>POS Kasir</span>
+    <span class="marquee-item"><span class="dot"></span>Kelola Stok</span>
+    <span class="marquee-item"><span class="dot"></span>Laporan Real-time</span>
+    <span class="marquee-item"><span class="dot"></span>Promo & Diskon</span>
+    <span class="marquee-item"><span class="dot"></span>Ekspor Data</span>
+    <span class="marquee-item"><span class="dot"></span>Multi Role</span>
+    <span class="marquee-item"><span class="dot"></span>Offline Stable</span>
+    <span class="marquee-item"><span class="dot"></span>UMKM Friendly</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products" id="produk">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-label">Ekosistem Muwira</span>
+      <h2 class="section-title">Produk kami untuk<br><em>bisnis Anda</em></h2>
+    </div>
+    <p class="section-note">Dari kasir offline hingga custom software — semua dirancang dari kebutuhan nyata di lapangan.</p>
+  </div>
+  <div class="products-grid">
+    <div class="prod-card featured reveal">
+      <div class="prod-num">01 / Andalan</div>
+      <div class="prod-icon yellow">🟡</div>
+      <h3>POS Pro</h3>
+      <p>Sistem kasir desktop offline lengkap untuk mengelola transaksi harian, stok inventaris, laporan omzet & laba, kode promo, dan operasional toko secara efisien. Dirancang untuk UMKM dan bisnis retail lokal.</p>
+      <span class="prod-tag highlight">Tersedia Sekarang</span>
+      <span class="prod-arrow">↗</span>
+    </div>
+    <div class="prod-card reveal" style="transition-delay:.1s">
+      <div class="prod-num">02</div>
+      <div class="prod-icon blue">🔵</div>
+      <h3>Custom Software</h3>
+      <p>Pengembangan aplikasi sesuai kebutuhan bisnis dan operasional spesifik Anda. Solusi yang benar-benar dibuat untuk Anda.</p>
+      <span class="prod-tag">Tersedia</span>
+      <span class="prod-arrow">↗</span>
+    </div>
+    <div class="prod-card reveal" style="transition-delay:.2s">
+      <div class="prod-num">03</div>
+      <div class="prod-icon green">🟢</div>
+      <h3>Future Projects</h3>
+      <p>Platform, AI tools, dan solusi digital lain dalam ekosistem Muwira. Sedang dalam pengembangan.</p>
+      <span class="prod-tag">Segera Hadir</span>
+      <span class="prod-arrow">↗</span>
     </div>
   </div>
 </section>
 
 <!-- FEATURES -->
 <section class="features" id="fitur">
-  <span class="section-label">✦ Fitur Unggulan</span>
-  <h2 class="section-title">Semua yang Dibutuhkan Bisnis Anda</h2>
-  <p class="section-sub">Dari transaksi kasir hingga laporan profit — POS Pro menyederhanakan operasional harian bisnis Anda.</p>
-  <div class="feat-grid">
-    <div class="feat-card reveal">
-      <div class="feat-icon">🛒</div>
-      <h3>POS Kasir Cepat</h3>
-      <p>Proses transaksi dengan cepat. Cari produk, tambah ke keranjang, pilih metode bayar, dan cetak struk dalam hitungan detik.</p>
-    </div>
-    <div class="feat-card reveal" style="transition-delay:.1s">
-      <div class="feat-icon">📦</div>
-      <h3>Kelola Stok Otomatis</h3>
-      <p>Stok berkurang otomatis setiap transaksi. Dapatkan notifikasi ketika stok menipis dan tambah pasok dengan mudah.</p>
-    </div>
-    <div class="feat-card reveal" style="transition-delay:.2s">
-      <div class="feat-icon">📊</div>
-      <h3>Laporan Real-time</h3>
-      <p>Pantau omzet, laba kotor, modal HPP, dan rata-rata transaksi. Grafik penjualan per jam tersedia langsung.</p>
-    </div>
-    <div class="feat-card reveal" style="transition-delay:.3s">
-      <div class="feat-icon">%</div>
-      <h3>Manajemen Promo</h3>
-      <p>Buat kode promo diskon fleksibel. Kasir cukup input kode saat checkout — diskon terapkan otomatis.</p>
-    </div>
-    <div class="feat-card reveal" style="transition-delay:.4s">
-      <div class="feat-icon">📤</div>
-      <h3>Ekspor Data</h3>
-      <p>Export laporan transaksi dan stok ke format yang Anda butuhkan untuk kebutuhan pembukuan dan analisis lebih lanjut.</p>
-    </div>
-    <div class="feat-card reveal" style="transition-delay:.5s">
-      <div class="feat-icon">🔐</div>
-      <h3>Multi-Role Aman</h3>
-      <p>Dua level akses: Administrator dengan kontrol penuh, dan Kasir yang fokus pada transaksi harian saja.</p>
-    </div>
+  <div class="features-intro reveal">
+    <span class="section-label">Fitur POS Pro</span>
+    <h2 class="section-title">Semua yang dibutuhkan<br>untuk operasional toko</h2>
   </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how" id="cara-kerja">
-  <span class="section-label">✦ Cara Kerja</span>
-  <h2 class="section-title" style="color:#fff">Mulai Dalam 4 Langkah Mudah</h2>
-  <p class="section-sub">Tidak perlu keahlian teknis. Setup cepat, langsung bisa digunakan.</p>
-  <div class="steps">
-    <div class="step reveal">
-      <div class="step-num">1</div>
-      <h4>Daftar & Login</h4>
-      <p>Buat akun Administrator, atur profil toko Anda.</p>
+  <div class="features-layout">
+    <div class="feat-big reveal">
+      <div class="feat-top">
+        <div class="feat-icon2">🛒</div>
+        <span class="feat-num2">01</span>
+      </div>
+      <div>
+        <h4>POS Kasir Real-time</h4>
+        <p>Proses transaksi dengan cepat. Cari produk, tambah ke keranjang, terapkan promo, pilih metode pembayaran — Tunai, QRIS, Transfer Bank, atau Debit/Kredit — dan selesaikan dalam hitungan detik.</p>
+      </div>
     </div>
-    <div class="step reveal" style="transition-delay:.1s">
-      <div class="step-num">2</div>
-      <h4>Input Produk</h4>
-      <p>Tambah produk dengan harga, modal, dan stok awal.</p>
+    <div class="feat-small-col">
+      <div class="feat-small reveal" style="transition-delay:.1s">
+        <div class="feat-icon2">📦</div>
+        <h4>Kelola Stok Otomatis</h4>
+        <p>Stok berkurang real-time tiap transaksi. Notifikasi "Stok Menipis" dan fitur Pasok instan.</p>
+      </div>
+      <div class="feat-small reveal" style="transition-delay:.15s">
+        <div class="feat-icon2">📊</div>
+        <h4>Laporan & Analitik</h4>
+        <p>Pantau omzet, laba kotor, HPP, dan grafik penjualan per jam langsung dari dashboard.</p>
+      </div>
     </div>
-    <div class="step reveal" style="transition-delay:.2s">
-      <div class="step-num">3</div>
-      <h4>Mulai Transaksi</h4>
-      <p>Kasir login, pilih produk, proses pembayaran.</p>
+    <div class="feat-small-col">
+      <div class="feat-small reveal" style="transition-delay:.2s">
+        <div class="feat-icon2">%</div>
+        <h4>Manajemen Promo</h4>
+        <p>Buat kode promo diskon fleksibel. Kasir input kode — diskon terapkan otomatis ke total.</p>
+      </div>
+      <div class="feat-small reveal" style="transition-delay:.25s">
+        <div class="feat-icon2">📤</div>
+        <h4>Ekspor Data</h4>
+        <p>Export laporan transaksi dan inventaris untuk pembukuan dan analisis eksternal.</p>
+      </div>
     </div>
-    <div class="step reveal" style="transition-delay:.3s">
-      <div class="step-num">4</div>
-      <h4>Pantau Laporan</h4>
-      <p>Lihat omzet dan profit kapan saja, di mana saja.</p>
+    <div class="feat-big reveal" style="transition-delay:.1s">
+      <div class="feat-top">
+        <div class="feat-icon2">🔐</div>
+        <span class="feat-num2">06</span>
+      </div>
+      <div>
+        <h4>Multi-Role Terstruktur</h4>
+        <p>Administrator punya kendali penuh: stok, promo, laporan, ekspor, dan manajemen user. Kasir fokus pada transaksi harian. Setiap orang bekerja sesuai tanggung jawabnya.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ROLES -->
-<section class="roles" id="role">
-  <span class="section-label">✦ Role Pengguna</span>
-  <h2 class="section-title">Dua Role, Satu Tujuan</h2>
-  <p class="section-sub">Setiap pengguna mendapat akses sesuai tugasnya agar operasional lebih aman dan terstruktur.</p>
+<section class="roles">
+  <div class="reveal">
+    <span class="section-label">Akses Pengguna</span>
+    <h2 class="section-title">Dua role,<br>satu sistem</h2>
+  </div>
   <div class="roles-grid">
-    <div class="role-card admin reveal">
-      <div class="role-avatar">AD</div>
-      <h3>Administrator</h3>
-      <p class="role-sub">Kontrol penuh atas bisnis Anda</p>
+    <div class="role-card r-admin reveal">
+      <div class="role-badge">
+        <div class="role-ava">AD</div>
+        <span class="role-badge-label">Administrator</span>
+      </div>
+      <h3>Kontrol Penuh</h3>
+      <p class="role-desc">Administrator memiliki akses ke semua modul sistem — dari manajemen produk hingga laporan bisnis.</p>
       <ul class="role-perks">
-        <li><span class="perk-dot">✓</span>Kelola produk & stok inventaris</li>
-        <li><span class="perk-dot">✓</span>Buat & kelola kode promo</li>
-        <li><span class="perk-dot">✓</span>Lihat laporan omzet & laba</li>
-        <li><span class="perk-dot">✓</span>Ekspor data transaksi</li>
-        <li><span class="perk-dot">✓</span>Manajemen akun kasir</li>
+        <li><span class="perk-check">✓</span>Kelola produk & inventaris stok</li>
+        <li><span class="perk-check">✓</span>Buat & kelola kode promo diskon</li>
+        <li><span class="perk-check">✓</span>Lihat laporan omzet, laba & HPP</li>
+        <li><span class="perk-check">✓</span>Ekspor data transaksi & stok</li>
+        <li><span class="perk-check">✓</span>Manajemen akun kasir & profil toko</li>
       </ul>
     </div>
-    <div class="role-card kasir reveal" style="transition-delay:.15s">
-      <div class="role-avatar">KS</div>
-      <h3>Kasir</h3>
-      <p class="role-sub">Fokus pada transaksi harian</p>
+    <div class="role-card r-kasir reveal" style="transition-delay:.15s">
+      <div class="role-badge">
+        <div class="role-ava">KS</div>
+        <span class="role-badge-label">Kasir</span>
+      </div>
+      <h3>Fokus Transaksi</h3>
+      <p class="role-desc">Kasir mendapat antarmuka yang bersih dan sederhana — hanya yang dibutuhkan untuk melayani pelanggan.</p>
       <ul class="role-perks">
-        <li><span class="perk-dot">✓</span>Proses transaksi penjualan</li>
-        <li><span class="perk-dot">✓</span>Input & terapkan kode promo</li>
-        <li><span class="perk-dot">✓</span>Pilih metode pembayaran</li>
-        <li><span class="perk-dot">✓</span>Cetak struk transaksi</li>
-        <li><span class="perk-dot">✓</span>Lihat stok produk tersedia</li>
+        <li><span class="perk-check">✓</span>Proses transaksi penjualan</li>
+        <li><span class="perk-check">✓</span>Input & terapkan kode promo aktif</li>
+        <li><span class="perk-check">✓</span>Pilih metode pembayaran fleksibel</li>
+        <li><span class="perk-check">✓</span>Cetak struk & riwayat transaksi</li>
+        <li><span class="perk-check">✓</span>Lihat ketersediaan stok produk</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values" id="nilai">
+  <div class="reveal">
+    <span class="section-label">Nilai Muwira</span>
+    <h2 class="section-title">Prinsip yang<br>mendasari semua <em>produk kami</em></h2>
+  </div>
+  <div class="values-grid">
+    <div class="value-card reveal">
+      <span class="value-no">01</span>
+      <h4>Simple</h4>
+      <p>Mudah dipahami dan mudah digunakan. Teknologi tidak harus rumit untuk memberikan dampak besar.</p>
+    </div>
+    <div class="value-card reveal" style="transition-delay:.1s">
+      <span class="value-no">02</span>
+      <h4>Flexible</h4>
+      <p>Dapat berkembang mengikuti kebutuhan pengguna. Setiap produk dirancang untuk terus tumbuh.</p>
+    </div>
+    <div class="value-card reveal" style="transition-delay:.2s">
+      <span class="value-no">03</span>
+      <h4>Reliable</h4>
+      <p>Stabil dan dapat diandalkan. Beroperasi penuh secara offline tanpa bergantung koneksi internet.</p>
+    </div>
+    <div class="value-card reveal" style="transition-delay:.3s">
+      <span class="value-no">04</span>
+      <h4>Continuous Creation</h4>
+      <p>Terus bereksperimen dan berkembang. Inovasi bukan tujuan akhir — ini cara kami bekerja.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="tentang">
+  <div class="about-layout">
+    <div class="about-left reveal">
+      <span class="section-label">Tentang Muwira</span>
+      <h2 class="section-title">Pengembang software yang berpikir dari lapangan</h2>
+      <div class="about-quote">
+        <p>"Build simple. Grow endlessly."</p>
+        <cite>— MUWIRA · Unlimited Creation</cite>
+      </div>
+    </div>
+    <div class="about-right reveal" style="transition-delay:.15s">
+      <p>Muwira adalah pengembang software yang berfokus pada solusi digital praktis, ringan, dan dapat berkembang sesuai kebutuhan pengguna. Kami percaya bahwa teknologi tidak harus rumit untuk memberikan dampak besar.</p>
+      <p>Dimulai dari kebutuhan nyata di lapangan, Muwira membangun produk yang mengutamakan kemudahan penggunaan, stabilitas, dan fleksibilitas. Setiap produk dirancang bukan hanya untuk dipakai hari ini, tetapi juga untuk terus berkembang seiring pertumbuhan penggunanya.</p>
+      <ul class="mission-list">
+        <li>Mengembangkan software yang ringan dan mudah digunakan</li>
+        <li>Membuat solusi yang berangkat dari kebutuhan nyata pengguna</li>
+        <li>Menyediakan produk yang fleksibel dan dapat berkembang</li>
+        <li>Mendukung digitalisasi bisnis lokal dan UMKM</li>
+        <li>Terus berinovasi melalui eksperimen dan pengembangan berkelanjutan</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-inner reveal">
+    <h2>Siap mulai dengan<br><span>POS Pro?</span></h2>
+    <p>Bergabung dengan bisnis yang sudah lebih rapi, efisien, dan mudah dikelola bersama Muwira.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-gold">🚀 Mulai Gunakan POS Pro</a>
+      <a href="#" class="btn-ghost">Hubungi Kami <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">POS Pro-Powered By MUWIRA</div>
-  <p>MUWIRA . INDONESIA. 085267333396</p>
-  <p>© 2026 POS Pro. Semua hak dilindungi.</p>
+  <div class="footer-brand">MUWIRA <span>·</span> Unlimited Creation</div>
+  <div class="footer-center">
+    Lampung-Indonesia · 085267333396<br>
+    © 2026 Muwira. Semua hak dilindungi.
+  </div>
+  <div class="footer-right">Build simple.<br>Grow endlessly.</div>
 </footer>
 
 <script>
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function animate() {
+    rx += (mx - rx) * .12; ry += (my - ry) * .12;
+    if (cursor) { cursor.style.left = mx+'px'; cursor.style.top = my+'px'; }
+    if (ring) { ring.style.left = rx+'px'; ring.style.top = ry+'px'; }
+    requestAnimationFrame(animate);
+  })();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { if(ring) ring.style.transform = 'translate(-50%,-50%) scale(1.6)'; });
+    el.addEventListener('mouseleave', () => { if(ring) ring.style.transform = 'translate(-50%,-50%) scale(1)'; });
+  });
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
