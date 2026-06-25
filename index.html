@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>POS Pro by Muwira — Unlimited Creation</title>
+<title>Muwira — POS Pro &amp; Billmu untuk Bisnis Anda</title>
 
 <!-- Open Graph -->
-<meta property="og:title" content="POS Pro by Muwira — Sistem Kasir Modern">
-<meta property="og:description" content="Kelola transaksi, stok, laporan, dan promo toko Anda dalam satu platform offline yang cepat dan mudah digunakan.">
+<meta property="og:title" content="Muwira — POS Pro &amp; Billmu untuk Bisnis Anda">
+<meta property="og:description" content="Muwira Pos sudah tersedia — sistem kasir offline terbaik untuk UMKM. Billmu segera hadir. Download gratis 14 hari sekarang!">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="id_ID">
-<meta name="description" content="POS Pro by Muwira — Sistem kasir desktop offline untuk mengelola transaksi, stok, laporan, promo, dan operasional toko.">
+<meta name="description" content="Muwira Pos sudah rilis — sistem kasir desktop offline untuk kelola transaksi, stok &amp; laporan. Billmu (billing &amp; invoice) segera hadir.">
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -23,6 +23,7 @@
   --gold:   #F0B429;
   --gold2:  #FFCF5C;
   --blue:   #3B82F6;
+  --blue2:  #60A5FA;
   --green:  #22C55E;
   --white:  #F5F7F5;
   --muted:  #6B7F70;
@@ -30,10 +31,10 @@
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+html { scroll-behavior:smooth; scroll-padding-top:80px; }
 
 body {
-  font-family:'Instrument Sans', sans-serif;
+  font-family:'Plus Jakarta Sans', sans-serif;
   background:var(--black);
   color:var(--white);
   overflow-x:hidden;
@@ -91,9 +92,32 @@ nav {
   padding:9px 22px; border-radius:6px;
   font-weight:600; font-size:.82rem; letter-spacing:.04em;
   border:none; cursor:pointer; font-family:inherit;
+  text-decoration:none;
   transition:background .2s, transform .15s;
+  display:inline-flex; align-items:center; gap:6px;
 }
 .nav-cta:hover { background:var(--gold2); transform:translateY(-1px); }
+
+/* ── PROD ACTIONS ── */
+.prod-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:4px; }
+.btn-prod-primary {
+  background:var(--gold); color:var(--black);
+  padding:11px 22px; border-radius:6px;
+  font-weight:700; font-size:.82rem; letter-spacing:.03em;
+  display:inline-flex; align-items:center; gap:7px;
+  border:none; cursor:pointer; font-family:inherit;
+  text-decoration:none; transition:all .2s; flex:1; justify-content:center;
+}
+.btn-prod-primary:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 10px 28px rgba(240,180,41,0.2); }
+.btn-prod-ghost {
+  color:var(--muted); font-size:.82rem;
+  display:inline-flex; align-items:center; gap:7px;
+  padding:11px 18px; text-decoration:none;
+  border:1px solid var(--border); border-radius:6px;
+  background:none; cursor:pointer; font-family:inherit;
+  transition:all .2s; flex:1; justify-content:center;
+}
+.btn-prod-ghost:hover { color:var(--white); border-color:rgba(240,180,41,0.3); }
 
 /* ── HERO ── */
 .hero {
@@ -116,7 +140,7 @@ nav {
 .hero-glow2 {
   position:absolute; bottom:-100px; left:30%;
   width:500px; height:500px;
-  background:radial-gradient(circle,rgba(34,197,94,0.05) 0%,transparent 65%);
+  background:radial-gradient(circle,rgba(59,130,246,0.05) 0%,transparent 65%);
   z-index:0;
 }
 .hero-inner { position:relative; z-index:2; max-width:1200px; }
@@ -195,6 +219,22 @@ nav {
 .meta-val span { color:var(--gold); }
 .meta-label { font-size:.75rem; color:var(--muted); letter-spacing:.06em; margin-top:4px; }
 
+/* ── STATUS BADGE (float) ── */
+.hero-coming {
+  display:inline-flex; align-items:center; gap:10px;
+  margin-bottom:28px;
+  padding:8px 18px;
+  border:1px solid rgba(34,197,94,0.3);
+  border-radius:100px;
+  background:rgba(34,197,94,0.06);
+  animation:slideIn .7s ease both;
+}
+.hero-coming-dot {
+  width:7px; height:7px; border-radius:50%;
+  background:var(--green); animation:blink 2s infinite;
+}
+.hero-coming span { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--green); font-weight:600; }
+
 /* ── MARQUEE ── */
 .marquee-section {
   border-top:1px solid var(--border); border-bottom:1px solid var(--border);
@@ -202,7 +242,7 @@ nav {
 }
 .marquee-track {
   display:flex; white-space:nowrap;
-  animation:marquee 22s linear infinite;
+  animation:marquee 28s linear infinite;
 }
 .marquee-item {
   display:inline-flex; align-items:center; gap:16px;
@@ -228,43 +268,142 @@ nav {
   font-weight:800; line-height:1.1; letter-spacing:-.02em; color:var(--white);
 }
 .section-title em { color:var(--gold); font-style:normal; }
+.section-title em.blue-em { color:var(--blue2); font-style:normal; }
 .section-note { color:var(--muted); font-size:.85rem; max-width:280px; text-align:right; line-height:1.6; flex-shrink:0; }
 
-.products-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:2px; }
-.prod-card {
-  background:var(--panel); padding:44px 40px;
+/* Two-product showcase */
+.products-showcase {
+  display:grid; grid-template-columns:1fr 1fr; gap:2px;
+}
+
+.prod-main {
+  background:var(--panel); padding:52px 48px;
   border:1px solid var(--border);
   position:relative; overflow:hidden; transition:background .3s;
+  display:flex; flex-direction:column;
 }
-.prod-card:hover { background:rgba(240,180,41,0.04); }
-.prod-num { font-family:'Plus Jakarta Sans',sans-serif; font-size:.7rem; letter-spacing:.12em; color:var(--muted); margin-bottom:48px; }
+.prod-main:hover { background:rgba(240,180,41,0.04); }
+.prod-main.blue-card:hover { background:rgba(59,130,246,0.04); }
+
+.prod-num { font-size:.7rem; letter-spacing:.12em; color:var(--muted); margin-bottom:48px; }
 .prod-icon {
-  width:48px; height:48px; border-radius:12px;
+  width:52px; height:52px; border-radius:14px;
   display:flex; align-items:center; justify-content:center;
-  font-size:1.4rem; margin-bottom:24px;
+  font-size:1.5rem; margin-bottom:28px;
 }
 .prod-icon.yellow { background:rgba(240,180,41,0.15); }
 .prod-icon.blue   { background:rgba(59,130,246,0.15); }
-.prod-icon.green  { background:rgba(34,197,94,0.12); }
-.prod-card h3 {
-  font-family:'Plus Jakarta Sans',sans-serif; font-size:1.3rem; font-weight:700;
-  color:var(--white); margin-bottom:10px; letter-spacing:-.01em;
+
+.prod-main h3 {
+  font-family:'Plus Jakarta Sans',sans-serif; font-size:1.8rem; font-weight:800;
+  color:var(--white); margin-bottom:12px; letter-spacing:-.02em;
 }
-.prod-card p { color:var(--muted); font-size:.85rem; line-height:1.65; margin-bottom:32px; }
+.prod-main > p { color:var(--muted); font-size:.88rem; line-height:1.7; margin-bottom:36px; flex:1; }
+
+.prod-features {
+  list-style:none; display:flex; flex-direction:column; gap:10px;
+  margin-bottom:36px;
+}
+.prod-features li {
+  display:flex; align-items:center; gap:10px;
+  font-size:.82rem; color:rgba(245,247,245,0.65);
+}
+.feat-check {
+  width:18px; height:18px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.55rem; flex-shrink:0;
+}
+.yellow-check { background:rgba(240,180,41,0.15); color:var(--gold); }
+.blue-check   { background:rgba(59,130,246,0.15); color:var(--blue2); }
+
+.prod-footer {
+  display:flex; align-items:center; justify-content:space-between;
+  padding-top:28px; border-top:1px solid var(--border);
+}
 .prod-tag {
-  display:inline-block; border:1px solid var(--border);
-  color:var(--muted); font-size:.7rem; padding:4px 12px;
+  display:inline-flex; align-items:center; gap:7px;
+  border:1px solid var(--border);
+  color:var(--muted); font-size:.7rem; padding:5px 14px;
   border-radius:100px; letter-spacing:.06em;
 }
-.prod-tag.highlight { border-color:rgba(240,180,41,0.3); color:var(--gold); background:rgba(240,180,41,0.06); }
+.prod-tag .tag-dot {
+  width:5px; height:5px; border-radius:50%;
+  background:currentColor; animation:blink 2s infinite;
+}
+.prod-tag.highlight-gold {
+  border-color:rgba(240,180,41,0.3); color:var(--gold);
+  background:rgba(240,180,41,0.06);
+}
+.prod-tag.highlight-green {
+  border-color:rgba(34,197,94,0.35); color:var(--green);
+  background:rgba(34,197,94,0.07);
+}
+.prod-tag.highlight-blue {
+  border-color:rgba(59,130,246,0.3); color:var(--blue2);
+  background:rgba(59,130,246,0.06);
+}
 .prod-arrow {
-  position:absolute; top:40px; right:40px;
   color:var(--muted); font-size:1.1rem; transition:transform .2s,color .2s;
 }
-.prod-card:hover .prod-arrow { transform:translate(3px,-3px); color:var(--gold); }
+.prod-main:hover .prod-arrow { transform:translate(3px,-3px); color:var(--gold); }
+.prod-main.blue-card:hover .prod-arrow { color:var(--blue2); }
+
+/* ── COUNTDOWN / STATUS ── */
+.status-section { padding:80px 64px; background:var(--black); }
+.status-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:64px; }
+.status-card {
+  background:var(--panel); border:1px solid var(--border);
+  padding:40px 44px;
+  display:flex; flex-direction:column; gap:24px;
+  transition:background .3s;
+}
+.status-card:hover { background:rgba(240,180,41,0.03); }
+.status-card.blue-status:hover { background:rgba(59,130,246,0.03); }
+.status-head { display:flex; align-items:center; gap:16px; }
+.status-icon {
+  width:44px; height:44px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+  flex-shrink:0;
+}
+.status-icon.y { background:rgba(240,180,41,0.12); }
+.status-icon.b { background:rgba(59,130,246,0.12); }
+.status-name { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.1rem; font-weight:700; color:var(--white); }
+.status-sub  { font-size:.75rem; color:var(--muted); margin-top:2px; }
+.progress-wrap { display:flex; flex-direction:column; gap:8px; }
+.progress-label {
+  display:flex; justify-content:space-between;
+  font-size:.72rem; color:var(--muted); letter-spacing:.04em;
+}
+.progress-bar {
+  height:4px; background:rgba(255,255,255,0.07); border-radius:100px;
+  overflow:hidden;
+}
+.progress-fill {
+  height:100%; border-radius:100px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transition:width 1.5s cubic-bezier(0.4,0,0.2,1);
+  width:0%;
+}
+.progress-fill.blue-fill {
+  background:linear-gradient(90deg,var(--blue),var(--blue2));
+}
+.milestones {
+  list-style:none; display:flex; flex-direction:column; gap:10px;
+}
+.milestone {
+  display:flex; align-items:center; gap:10px;
+  font-size:.8rem; color:var(--muted);
+}
+.milestone.done { color:rgba(245,247,245,0.7); }
+.milestone-dot {
+  width:8px; height:8px; border-radius:50%; flex-shrink:0;
+  border:1.5px solid rgba(255,255,255,0.15);
+}
+.milestone.done .milestone-dot { background:var(--gold); border-color:var(--gold); }
+.milestone.done.blue-m .milestone-dot { background:var(--blue2); border-color:var(--blue2); }
 
 /* ── FEATURES ── */
-.features { padding:120px 64px; background:var(--black); }
+.features { padding:120px 64px; background:var(--dark); }
 .features-intro { max-width:600px; margin-bottom:80px; }
 .features-layout { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
 
@@ -282,13 +421,16 @@ nav {
 }
 .feat-big:hover { background:rgba(240,180,41,0.03); }
 .feat-big:hover::after { transform:scaleX(1); }
+.feat-big.blue-feat::after { background:linear-gradient(90deg,var(--blue2),transparent); }
+.feat-big.blue-feat:hover { background:rgba(59,130,246,0.03); }
 .feat-top { display:flex; align-items:flex-start; justify-content:space-between; }
 .feat-icon2 {
   width:44px; height:44px; border-radius:10px;
   background:rgba(240,180,41,0.1);
   display:flex; align-items:center; justify-content:center; font-size:1.2rem;
 }
-.feat-num2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:.65rem; letter-spacing:.14em; color:var(--muted); }
+.feat-icon2.blue-icon { background:rgba(59,130,246,0.1); }
+.feat-num2 { font-size:.65rem; letter-spacing:.14em; color:var(--muted); }
 .feat-big h4 {
   font-family:'Plus Jakarta Sans',sans-serif; font-size:1.35rem; font-weight:700;
   color:var(--white); margin-bottom:12px; letter-spacing:-.01em; margin-top:32px;
@@ -299,41 +441,20 @@ nav {
 .feat-small {
   background:var(--panel); border:1px solid var(--border);
   padding:36px 40px; flex:1; transition:background .3s;
+  position:relative; overflow:hidden;
+}
+.feat-small::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  transform:scaleX(0); transform-origin:left; transition:transform .4s;
 }
 .feat-small:hover { background:rgba(240,180,41,0.03); }
+.feat-small:hover::after { transform:scaleX(1); }
+.feat-small.blue-small::after { background:linear-gradient(90deg,var(--blue2),transparent); }
+.feat-small.blue-small:hover { background:rgba(59,130,246,0.03); }
 .feat-small .feat-icon2 { margin-bottom:24px; }
 .feat-small h4 { font-family:'Plus Jakarta Sans',sans-serif; font-size:1rem; font-weight:700; color:var(--white); margin-bottom:8px; }
 .feat-small p { color:var(--muted); font-size:.82rem; line-height:1.6; }
-
-/* ── ROLES ── */
-.roles { padding:120px 64px; background:var(--dark); }
-.roles-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:64px; }
-.role-card { padding:56px 52px; border:1px solid var(--border); position:relative; }
-.role-card.r-admin { background:var(--panel); }
-.role-card.r-kasir { background:rgba(240,180,41,0.03); border-color:rgba(240,180,41,0.15); }
-.role-badge { display:inline-flex; align-items:center; gap:8px; margin-bottom:36px; }
-.role-ava {
-  width:40px; height:40px; border-radius:10px;
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:.85rem;
-}
-.r-admin .role-ava { background:var(--gold); color:var(--black); }
-.r-kasir .role-ava { background:var(--mid); color:var(--white); border:1px solid rgba(240,180,41,0.3); }
-.role-badge-label { font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
-.role-card h3 {
-  font-family:'Plus Jakarta Sans',sans-serif; font-size:1.8rem; font-weight:800;
-  letter-spacing:-.02em; color:var(--white); margin-bottom:10px;
-}
-.role-desc { color:var(--muted); font-size:.88rem; line-height:1.6; margin-bottom:36px; }
-.role-perks { list-style:none; display:flex; flex-direction:column; gap:12px; }
-.role-perks li { display:flex; align-items:center; gap:12px; font-size:.85rem; color:rgba(245,247,245,0.7); }
-.perk-check {
-  width:20px; height:20px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  font-size:.6rem; flex-shrink:0;
-}
-.r-admin .perk-check { background:rgba(240,180,41,0.15); color:var(--gold); }
-.r-kasir .perk-check { background:rgba(34,197,94,0.12); color:var(--green); }
 
 /* ── VALUES ── */
 .values { padding:120px 64px; background:var(--black); position:relative; overflow:hidden; }
@@ -350,7 +471,7 @@ nav {
   background:var(--panel); transition:all .3s; position:relative; z-index:2;
 }
 .value-card:hover { background:rgba(240,180,41,0.04); border-color:rgba(240,180,41,0.2); }
-.value-no { font-family:'Plus Jakarta Sans',sans-serif; font-size:.65rem; letter-spacing:.14em; color:var(--muted); margin-bottom:36px; display:block; }
+.value-no { font-size:.65rem; letter-spacing:.14em; color:var(--muted); margin-bottom:36px; display:block; }
 .value-card h4 { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.1rem; font-weight:700; color:var(--white); margin-bottom:12px; }
 .value-card p { color:var(--muted); font-size:.82rem; line-height:1.6; }
 
@@ -378,70 +499,104 @@ nav {
   flex-shrink:0; margin-top:2px;
 }
 
+/* ── WAITLIST (replaces FAQ in this version) ── */
+.waitlist { padding:120px 64px; background:var(--black); }
+.waitlist-wrap { max-width:960px; margin:64px auto 0; }
 
-
-
-/* ── SCREENSHOTS ── */
-.screenshots { padding:120px 64px; background:var(--black); }
-.ss-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:24px;
-  margin-top:60px;
-}
-.ss-card {
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:14px;
-  overflow:hidden;
-  transition:transform .25s ease, border-color .25s ease, background .25s ease;
-}
-.ss-card:hover {
-  transform:translateY(-6px);
-  border-color:rgba(240,180,41,0.25);
-  background:rgba(240,180,41,0.04);
-}
-.ss-card img {
-  width:100%;
-  display:block;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  background:var(--dark);
-  border-bottom:1px solid var(--border);
-}
-.ss-card h4 {
-  padding:18px 20px 4px;
-  color:var(--white);
-  font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:1rem;
-  font-weight:700;
-}
-.ss-card p {
-  padding:0 20px 20px;
-  color:var(--muted);
-  font-size:.82rem;
-  line-height:1.6;
-}
-
-/* ── FAQ ── */
-.faq { padding:120px 64px; background:var(--dark); }
-.faq-wrap { max-width:900px; margin:64px auto 0; display:flex; flex-direction:column; gap:14px; }
-.faq-item {
+.waitlist-card {
   background:var(--panel); border:1px solid var(--border);
-  border-radius:10px; padding:24px 28px;
-  transition:background .25s, border-color .25s;
+  padding:56px 64px;
+  display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+  position:relative; overflow:hidden;
 }
-.faq-item:hover { background:rgba(240,180,41,0.04); border-color:rgba(240,180,41,0.18); }
-.faq-item h4 {
-  font-family:'Plus Jakarta Sans',sans-serif; font-size:1rem; font-weight:700;
+.waitlist-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+.wl-left h3 {
+  font-family:'Plus Jakarta Sans',sans-serif; font-size:1.6rem; font-weight:800;
+  color:var(--white); margin-bottom:16px; letter-spacing:-.02em;
+}
+.wl-left p { color:var(--muted); font-size:.9rem; line-height:1.75; margin-bottom:32px; }
+.wl-perks { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.wl-perks li {
+  display:flex; align-items:center; gap:12px;
+  font-size:.85rem; color:rgba(245,247,245,0.7);
+}
+.wl-perks li::before {
+  content:'→'; color:var(--gold); font-weight:600; font-size:.8rem; flex-shrink:0;
+}
+
+/* Form */
+.wl-form { display:flex; flex-direction:column; gap:16px; }
+.form-group { display:flex; flex-direction:column; gap:7px; }
+.form-group label {
+  font-size:.8rem; color:var(--white); font-weight:600; letter-spacing:.03em;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width:100%; background:var(--dark); border:1px solid var(--border);
+  border-radius:6px; padding:12px 16px; color:var(--white);
+  font-family:inherit; font-size:.9rem; transition:border-color .2s,background .2s;
+  appearance:none;
+}
+.form-group select {
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7F70' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 14px center; padding-right:36px;
+  background-color:var(--dark);
+}
+.form-group select option { background:var(--dark); }
+.form-group input::placeholder { color:var(--muted); }
+.form-group input:focus,
+.form-group select:focus { outline:none; border-color:var(--gold); background:rgba(240,180,41,0.04); }
+
+.checkboxes {
+  display:flex; gap:20px;
+}
+.check-label {
+  display:flex; align-items:center; gap:9px;
+  cursor:pointer; font-size:.85rem; color:var(--muted);
+  transition:color .2s;
+}
+.check-label:hover { color:var(--white); }
+.check-label input[type="checkbox"] { display:none; }
+.checkmark {
+  width:18px; height:18px; border-radius:5px;
+  border:1.5px solid rgba(255,255,255,0.2);
+  background:var(--mid); transition:all .2s;
+  position:relative; flex-shrink:0;
+}
+.check-label input:checked ~ .checkmark {
+  background:var(--gold); border-color:var(--gold);
+}
+.check-label input:checked ~ .checkmark::after {
+  content:'';
+  position:absolute; left:5px; top:2px;
+  width:5px; height:9px;
+  border:2px solid var(--black);
+  border-top:none; border-left:none;
+  transform:rotate(45deg);
+}
+.wl-privacy {
+  font-size:.72rem; color:var(--muted); text-align:center;
+  letter-spacing:.02em; margin-top:4px;
+}
+
+.wl-success {
+  display:none; text-align:center; padding:32px 0;
+}
+.wl-success.show { display:block; }
+.wl-success .s-icon { font-size:2.4rem; margin-bottom:16px; }
+.wl-success h3 {
+  font-family:'Plus Jakarta Sans',sans-serif; font-size:1.4rem;
   color:var(--white); margin-bottom:10px;
 }
-.faq-item p { color:var(--muted); font-size:.88rem; line-height:1.7; }
-.faq-item a { color:var(--gold); text-decoration:none; font-weight:600; }
-.faq-item a:hover { color:var(--gold2); }
+.wl-success p { color:var(--muted); font-size:.88rem; line-height:1.6; }
 
 /* ── CTA ── */
-.cta { padding:120px 64px; background:var(--black); position:relative; overflow:hidden; }
+.cta { padding:120px 64px; background:var(--dark); position:relative; overflow:hidden; }
 .cta-inner { max-width:800px; margin:0 auto; text-align:center; position:relative; z-index:2; }
 .cta-glow {
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
@@ -470,59 +625,6 @@ footer {
 .footer-center { text-align:center; color:var(--muted); font-size:.75rem; line-height:1.6; }
 .footer-right { text-align:right; color:var(--muted); font-size:.75rem; }
 
-/* ── MODAL ── */
-.modal-overlay {
-  display:none; position:fixed; inset:0;
-  background:rgba(0,0,0,0.75); backdrop-filter:blur(6px);
-  z-index:1000; justify-content:center; align-items:center; padding:20px;
-}
-.modal-overlay.active { display:flex; }
-.modal-content {
-  background:var(--panel); border:1px solid var(--border);
-  border-radius:12px; padding:48px; max-width:500px; width:100%;
-  position:relative; animation:slideUp .3s ease;
-}
-@keyframes slideUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
-.modal-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:32px; }
-.modal-header h2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.6rem; font-weight:800; color:var(--white); }
-.modal-close {
-  background:none; border:none; color:var(--muted); font-size:1.6rem;
-  cursor:pointer; transition:color .2s; width:32px; height:32px;
-  display:flex; align-items:center; justify-content:center; line-height:1;
-}
-.modal-close:hover { color:var(--white); }
-.form-group { margin-bottom:20px; }
-.form-group label { display:block; margin-bottom:8px; font-size:.85rem; color:var(--white); font-weight:600; letter-spacing:.03em; }
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width:100%; background:var(--dark); border:1px solid var(--border);
-  border-radius:6px; padding:12px 16px; color:var(--white);
-  font-family:inherit; font-size:.9rem; transition:border-color .2s,background .2s;
-  appearance:none;
-}
-.form-group select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7F70' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus { outline:none; border-color:var(--gold); background:rgba(240,180,41,0.04); }
-.form-group textarea { resize:vertical; min-height:90px; }
-.form-actions { display:flex; gap:12px; margin-top:28px; }
-.form-actions button {
-  flex:1; padding:12px 24px; border-radius:6px; font-weight:600;
-  font-size:.85rem; letter-spacing:.04em; border:none; cursor:pointer;
-  transition:all .2s; font-family:inherit;
-}
-.btn-submit { background:var(--gold); color:var(--black); }
-.btn-submit:hover { background:var(--gold2); transform:translateY(-2px); }
-.btn-cancel { background:transparent; color:var(--muted); border:1px solid var(--border) !important; }
-.btn-cancel:hover { color:var(--white); border-color:rgba(240,180,41,0.3) !important; }
-.form-success {
-  text-align:center; padding:24px 0;
-}
-.form-success .success-icon { font-size:2.5rem; margin-bottom:16px; }
-.form-success h3 { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.3rem; color:var(--white); margin-bottom:10px; }
-.form-success p { color:var(--muted); font-size:.88rem; line-height:1.6; }
-
 /* ── SCROLL REVEAL ── */
 .reveal { opacity:0; transform:translateY(28px); transition:opacity .65s ease,transform .65s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
@@ -531,31 +633,29 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px) {
-  .products-grid { grid-template-columns:1fr 1fr; }
+  .products-showcase { grid-template-columns:1fr; }
+  .status-grid { grid-template-columns:1fr; }
   .features-layout { grid-template-columns:1fr; }
   .values-grid { grid-template-columns:repeat(2,1fr); }
+  .waitlist-card { grid-template-columns:1fr; gap:48px; }
 }
 @media(max-width:900px) {
   nav { padding:16px 24px; }
   .nav-links,.nav-tag { display:none; }
-  .hero,.products,.features,.screenshots,.roles,.values,.about,.faq,.cta { padding:80px 24px; }
+  .hero,.products,.features,.status-section,.values,.about,.waitlist,.cta { padding:80px 24px; }
   .hero h1 { font-size:clamp(2.4rem,8vw,3.5rem); }
-  .products-grid { grid-template-columns:1fr; }
-  .roles-grid { grid-template-columns:1fr; }
-  .about-layout { grid-template-columns:1fr; gap:48px; }
   .section-header { flex-direction:column; align-items:flex-start; }
   .section-note { text-align:left; max-width:100%; }
+  .about-layout { grid-template-columns:1fr; gap:48px; }
   footer { grid-template-columns:1fr; text-align:center; padding:32px 24px; }
   .footer-right { text-align:center; }
-  .modal-content { padding:28px 24px; }
   .cta-btns { flex-direction:column; align-items:center; }
+  .waitlist-card { padding:36px 28px; }
 }
 @media(max-width:480px) {
   .values-grid { grid-template-columns:1fr; }
   .hero-meta { gap:24px; }
-  .feat-big { padding:36px 28px; }
-  .feat-small { padding:28px 24px; }
-  .role-card { padding:36px 28px; }
+  .checkboxes { flex-direction:column; }
 }
 </style>
 </head>
@@ -563,53 +663,6 @@ footer {
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="orderModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>Pesan POS Pro</h2>
-      <button class="modal-close" id="closeModalBtn" aria-label="Tutup">&times;</button>
-    </div>
-    <div id="formWrap">
-      <div class="form-group">
-        <label for="name">Nama Lengkap *</label>
-        <input type="text" id="name" placeholder="Nama bisnis atau pemilik">
-      </div>
-      <div class="form-group">
-        <label for="phone">Nomor WhatsApp *</label>
-        <input type="tel" id="phone" placeholder="08xxxxxxxxxx">
-      </div>
-      <div class="form-group">
-        <label for="business">Jenis Bisnis *</label>
-        <select id="business">
-          <option value="">Pilih jenis bisnis...</option>
-          <option>Retail / Toko</option>
-          <option>Kafe / Restoran</option>
-          <option>Bakery / Pastry</option>
-          <option>Apotek</option>
-          <option>Salon / Barbershop</option>
-          <option>Butik / Fashion</option>
-          <option>Toko Kelontong</option>
-          <option>Lainnya</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="message">Pesan / Pertanyaan</label>
-        <textarea id="message" placeholder="Ceritakan kebutuhan Anda..."></textarea>
-      </div>
-      <div class="form-actions">
-        <button class="btn-cancel" id="cancelBtn">Batal</button>
-        <button class="btn-submit" id="submitBtn">Kirim via WhatsApp</button>
-      </div>
-    </div>
-    <div id="successWrap" style="display:none" class="form-success">
-      <div class="success-icon">✅</div>
-      <h3>Terima Kasih!</h3>
-      <p>Anda akan diarahkan ke WhatsApp Muwira. Kami akan segera merespons pesan Anda.</p>
-    </div>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav>
@@ -619,14 +672,14 @@ footer {
   </a>
   <ul class="nav-links">
     <li><a href="#produk">Produk</a></li>
-    <li><a href="#fitur">Fitur POS</a></li>
-    <li><a href="#screenshots">Screenshot</a></li>
+    <li><a href="#fitur">Fitur</a></li>
     <li><a href="#nilai">Nilai</a></li>
     <li><a href="#tentang">Tentang</a></li>
-    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#waitlist">Billmu Waitlist</a></li>
   </ul>
   <div class="nav-right">
     <span class="nav-tag">Build simple. Grow endlessly.</span>
+    <a href="https://github.com/reaperskull8-a11y/Muwira-Release/releases" target="_blank" class="nav-cta">⬇ Coba POS Pro</a>
   </div>
 </nav>
 
@@ -636,6 +689,10 @@ footer {
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
   <div class="hero-inner">
+    <div class="hero-coming">
+      <div class="hero-coming-dot"></div>
+      <span>Muwira Pos · Tersedia Sekarang</span>
+    </div>
     <div class="hero-eyebrow">
       <div class="eyebrow-dot"></div>
       <span class="eyebrow-text">Muwira · Unlimited Creation</span>
@@ -643,19 +700,14 @@ footer {
       <span class="eyebrow-brand">Software Studio</span>
     </div>
     <h1>
-      <span class="line1">Sistem Kasir</span>
-      <span class="line2">yang Ringan,</span>
-      <span class="line3">POS Pro.</span>
+      <span class="line1">Kasir Ringan,</span>
+      <span class="line2">Bisnis Lebih</span>
+      <span class="line3">Efisien.</span>
     </h1>
-    <p class="hero-sub">Kelola transaksi, stok, laporan, dan promo toko Anda dalam satu platform offline yang cepat, stabil, dan mudah digunakan siapa pun.</p>
+    <p class="hero-sub">Muwira Pos sudah tersedia — sistem kasir desktop offline untuk kelola transaksi, stok &amp; laporan toko Anda. <strong>Billmu</strong> (billing &amp; invoice otomatis) sedang dalam pengembangan.</p>
     <div class="hero-actions">
-      <a href="https://github.com/reaperskull8-a11y/Muwira-Release/releases"
-     target="_blank"
-     class="btn-gold">
-    ⬇ Download Gratis 14 Hari
-  </a>
-
-      <a href="#fitur" class="btn-ghost">Lihat semua fitur <span class="arrow">→</span></a>
+      <a href="https://github.com/reaperskull8-a11y/Muwira-Release/releases" target="_blank" class="btn-gold">⬇ Download Gratis 14 Hari</a>
+      <a href="#produk" class="btn-ghost">Lihat semua produk <span class="arrow">→</span></a>
     </div>
     <div class="hero-meta">
       <div class="meta-item">
@@ -664,7 +716,7 @@ footer {
       </div>
       <div class="meta-item">
         <div class="meta-val">6<span>+</span></div>
-        <div class="meta-label">Fitur Utama</div>
+        <div class="meta-label">Fitur Utama POS</div>
       </div>
       <div class="meta-item">
         <div class="meta-val">100<span>%</span></div>
@@ -681,21 +733,27 @@ footer {
 <!-- MARQUEE -->
 <div class="marquee-section">
   <div class="marquee-track">
+    <span class="marquee-item"><span class="dot"></span>Muwira Pos</span>
+    <span class="marquee-item"><span class="dot"></span>Tersedia Sekarang</span>
     <span class="marquee-item"><span class="dot"></span>POS Kasir</span>
     <span class="marquee-item"><span class="dot"></span>Kelola Stok</span>
     <span class="marquee-item"><span class="dot"></span>Laporan Real-time</span>
     <span class="marquee-item"><span class="dot"></span>Promo &amp; Diskon</span>
-    <span class="marquee-item"><span class="dot"></span>Ekspor Data</span>
-    <span class="marquee-item"><span class="dot"></span>Multi Role</span>
     <span class="marquee-item"><span class="dot"></span>Offline Stable</span>
+    <span class="marquee-item"><span class="dot"></span>Billmu · Segera Hadir</span>
+    <span class="marquee-item"><span class="dot"></span>Invoice Otomatis</span>
+    <span class="marquee-item"><span class="dot"></span>Billing &amp; Tagihan</span>
     <span class="marquee-item"><span class="dot"></span>UMKM Friendly</span>
+    <span class="marquee-item"><span class="dot"></span>Muwira Pos</span>
+    <span class="marquee-item"><span class="dot"></span>Tersedia Sekarang</span>
     <span class="marquee-item"><span class="dot"></span>POS Kasir</span>
     <span class="marquee-item"><span class="dot"></span>Kelola Stok</span>
     <span class="marquee-item"><span class="dot"></span>Laporan Real-time</span>
     <span class="marquee-item"><span class="dot"></span>Promo &amp; Diskon</span>
-    <span class="marquee-item"><span class="dot"></span>Ekspor Data</span>
-    <span class="marquee-item"><span class="dot"></span>Multi Role</span>
     <span class="marquee-item"><span class="dot"></span>Offline Stable</span>
+    <span class="marquee-item"><span class="dot"></span>Billmu · Segera Hadir</span>
+    <span class="marquee-item"><span class="dot"></span>Invoice Otomatis</span>
+    <span class="marquee-item"><span class="dot"></span>Billing &amp; Tagihan</span>
     <span class="marquee-item"><span class="dot"></span>UMKM Friendly</span>
   </div>
 </div>
@@ -705,34 +763,119 @@ footer {
   <div class="section-header reveal">
     <div>
       <span class="section-label">Ekosistem Muwira</span>
-      <h2 class="section-title">Produk kami untuk<br><em>bisnis Anda</em></h2>
+      <h2 class="section-title">Dua produk,<br><em>satu visi</em></h2>
     </div>
-    <p class="section-note">Dari kasir offline hingga custom software — semua dirancang dari kebutuhan nyata di lapangan.</p>
+    <p class="section-note">Dari kasir offline hingga billing otomatis — dirancang dari kebutuhan nyata bisnis Indonesia.</p>
   </div>
-  <div class="products-grid">
-    <div class="prod-card reveal">
+
+  <div class="products-showcase">
+    <!-- Product 1: Muwira Pos — SUDAH RILIS -->
+    <div class="prod-main reveal">
       <div class="prod-num">01 / Andalan</div>
       <div class="prod-icon yellow">🟡</div>
-      <h3>POS Pro</h3>
+      <h3>Muwira Pos</h3>
       <p>Sistem kasir desktop offline lengkap untuk mengelola transaksi harian, stok inventaris, laporan omzet &amp; laba, kode promo, dan operasional toko secara efisien. Dirancang untuk UMKM dan bisnis retail lokal.</p>
-      <span class="prod-tag highlight">Tersedia Sekarang</span>
-      <span class="prod-arrow">↗</span>
+      <ul class="prod-features">
+        <li><span class="feat-check yellow-check">✓</span>Kasir real-time — cepat &amp; intuitif</li>
+        <li><span class="feat-check yellow-check">✓</span>Manajemen stok &amp; inventori otomatis</li>
+        <li><span class="feat-check yellow-check">✓</span>Laporan omzet, laba &amp; HPP</li>
+        <li><span class="feat-check yellow-check">✓</span>QRIS, Transfer, Tunai &amp; Debit</li>
+        <li><span class="feat-check yellow-check">✓</span>Manajemen promo &amp; kode diskon</li>
+        <li><span class="feat-check yellow-check">✓</span>Role Admin &amp; Kasir terstruktur</li>
+      </ul>
+      <div class="prod-footer" style="flex-direction:column; align-items:flex-start; gap:16px;">
+        <span class="prod-tag highlight-green"><span class="tag-dot" style="background:var(--green)"></span>Tersedia Sekarang</span>
+        <div class="prod-actions">
+          <a href="https://github.com/reaperskull8-a11y/Muwira-Release/releases" target="_blank" class="btn-prod-primary">⬇ Coba Gratis 14 Hari</a>
+          <a href="https://lynk.id/muwira_store/we37j1prv3rk" target="_blank" rel="noopener" class="btn-prod-ghost">Dapatkan Lisensi →</a>
+        </div>
+      </div>
     </div>
-    <div class="prod-card reveal" style="transition-delay:.1s">
+
+    <!-- Product 2: Billmu — DALAM PENGEMBANGAN -->
+    <div class="prod-main blue-card reveal" style="transition-delay:.1s">
       <div class="prod-num">02</div>
       <div class="prod-icon blue">🔵</div>
-      <h3>Custom Software</h3>
-      <p>Pengembangan aplikasi sesuai kebutuhan bisnis dan operasional spesifik Anda. Solusi yang benar-benar dibuat untuk Anda.</p>
-      <span class="prod-tag">Tersedia</span>
-      <span class="prod-arrow">↗</span>
+      <h3>Billmu</h3>
+      <p>Platform billing dan invoice profesional yang mengotomatiskan proses penagihan Anda. Buat, kirim, dan lacak invoice dengan mudah — sehingga Anda bisa fokus pada pertumbuhan bisnis, bukan administrasi.</p>
+      <ul class="prod-features">
+        <li><span class="feat-check blue-check">✓</span>Buat invoice profesional dalam detik</li>
+        <li><span class="feat-check blue-check">✓</span>Kirim otomatis via Email &amp; WhatsApp</li>
+        <li><span class="feat-check blue-check">✓</span>Pelacakan status pembayaran real-time</li>
+        <li><span class="feat-check blue-check">✓</span>Reminder tagihan jatuh tempo otomatis</li>
+        <li><span class="feat-check blue-check">✓</span>Laporan keuangan &amp; arus kas</li>
+        <li><span class="feat-check blue-check">✓</span>Manajemen klien &amp; riwayat transaksi</li>
+      </ul>
+      <div class="prod-footer">
+        <span class="prod-tag highlight-blue"><span class="tag-dot"></span>Dalam Pengembangan</span>
+        <a href="#waitlist" class="btn-prod-ghost" style="flex:0; border-color:rgba(59,130,246,0.3); color:var(--blue2);">Daftar Notifikasi →</a>
+      </div>
     </div>
-    <div class="prod-card reveal" style="transition-delay:.2s">
-      <div class="prod-num">03</div>
-      <div class="prod-icon green">🟢</div>
-      <h3>Future Projects</h3>
-      <p>Platform, AI tools, dan solusi digital lain dalam ekosistem Muwira yang sedang dalam pengembangan.</p>
-      <span class="prod-tag">Segera Hadir</span>
-      <span class="prod-arrow">↗</span>
+  </div>
+</section>
+
+<!-- STATUS / PROGRESS -->
+<section class="status-section" id="perkembangan">
+  <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+    <span class="section-label">Status Produk</span>
+    <h2 class="section-title">Transparan &amp; <em>terbuka</em></h2>
+    <p style="color:var(--muted);font-size:.9rem;line-height:1.75;margin-top:16px;">Muwira Pos sudah rilis dan siap digunakan. Billmu sedang aktif dikembangkan.</p>
+  </div>
+  <div class="status-grid">
+    <!-- Muwira Pos — RILIS -->
+    <div class="status-card reveal">
+      <div class="status-head">
+        <div class="status-icon y">🟡</div>
+        <div>
+          <div class="status-name">Muwira Pos</div>
+          <div class="status-sub">Sistem Point of Sale · Sudah Rilis</div>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>Status</span>
+          <span class="progress-pct" id="pos-pct" style="color:var(--green);">100%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="pos-bar" data-target="100" style="background:linear-gradient(90deg,var(--green),#4ade80);"></div>
+        </div>
+      </div>
+      <ul class="milestones">
+        <li class="milestone done"><span class="milestone-dot"></span>Desain UI/UX</li>
+        <li class="milestone done"><span class="milestone-dot"></span>Sistem Kasir &amp; Transaksi</li>
+        <li class="milestone done"><span class="milestone-dot"></span>Manajemen Produk &amp; Stok</li>
+        <li class="milestone done"><span class="milestone-dot"></span>Laporan &amp; Analitik</li>
+        <li class="milestone done"><span class="milestone-dot"></span>Beta Testing &amp; QA</li>
+        <li class="milestone done"><span class="milestone-dot"></span>✅ Diluncurkan ke Publik</li>
+      </ul>
+    </div>
+
+    <!-- Billmu — DALAM PENGEMBANGAN -->
+    <div class="status-card blue-status reveal" style="transition-delay:.1s">
+      <div class="status-head">
+        <div class="status-icon b">🔵</div>
+        <div>
+          <div class="status-name">Billmu</div>
+          <div class="status-sub">Billing &amp; Invoice Platform · Dalam Pengembangan</div>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>Progres Pengembangan</span>
+          <span class="progress-pct" id="bill-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill blue-fill" id="bill-bar" data-target="40"></div>
+        </div>
+      </div>
+      <ul class="milestones">
+        <li class="milestone done blue-m"><span class="milestone-dot"></span>Riset &amp; Perencanaan Produk</li>
+        <li class="milestone done blue-m"><span class="milestone-dot"></span>Desain UI/UX</li>
+        <li class="milestone"><span class="milestone-dot"></span>Sistem Invoice &amp; Template</li>
+        <li class="milestone"><span class="milestone-dot"></span>Integrasi Notifikasi (Email &amp; WA)</li>
+        <li class="milestone"><span class="milestone-dot"></span>Beta Testing &amp; QA</li>
+        <li class="milestone"><span class="milestone-dot"></span>Peluncuran Publik</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -740,138 +883,55 @@ footer {
 <!-- FEATURES -->
 <section class="features" id="fitur">
   <div class="features-intro reveal">
-    <span class="section-label">Fitur POS Pro</span>
-    <h2 class="section-title">Semua yang dibutuhkan<br>untuk operasional toko</h2>
+    <span class="section-label">Fitur Unggulan</span>
+    <h2 class="section-title">Yang membuat produk kami<br>berbeda</h2>
   </div>
   <div class="features-layout">
+    <!-- Muwira Pos features -->
     <div class="feat-big reveal">
       <div class="feat-top">
         <div class="feat-icon2">🛒</div>
-        <span class="feat-num2">01</span>
+        <span class="feat-num2">Muwira Pos</span>
       </div>
       <div>
-        <h4>POS Kasir Real-time</h4>
-        <p>Proses transaksi dengan cepat. Cari produk, tambah ke keranjang, terapkan promo, pilih metode pembayaran — Tunai, QRIS, Transfer Bank, atau Debit/Kredit — dan selesaikan dalam hitungan detik.</p>
+        <h4>Kasir Real-time, Proses Kilat</h4>
+        <p>Cari produk, tambah ke keranjang, terapkan promo, pilih metode pembayaran — Tunai, QRIS, Transfer Bank, atau Debit — dan selesaikan transaksi dalam hitungan detik. Dirancang agar kasir bisa bekerja tanpa hambatan.</p>
       </div>
     </div>
     <div class="feat-small-col">
       <div class="feat-small reveal" style="transition-delay:.1s">
         <div class="feat-icon2">📦</div>
-        <h4>Kelola Stok Otomatis</h4>
-        <p>Stok berkurang real-time tiap transaksi. Notifikasi stok menipis dan fitur Pasok instan tersedia.</p>
+        <h4>Stok Otomatis &amp; Akurat</h4>
+        <p>Stok berkurang real-time setiap transaksi. Notifikasi stok menipis dan fitur restock instan tersedia langsung dari dashboard.</p>
       </div>
       <div class="feat-small reveal" style="transition-delay:.15s">
         <div class="feat-icon2">📊</div>
         <h4>Laporan &amp; Analitik</h4>
-        <p>Pantau omzet, laba kotor, HPP, dan grafik penjualan per jam langsung dari dashboard.</p>
+        <p>Pantau omzet, laba kotor, HPP, dan grafik penjualan per jam. Ekspor data untuk pembukuan eksternal kapan pun dibutuhkan.</p>
       </div>
     </div>
+    <!-- Billmu features -->
     <div class="feat-small-col">
-      <div class="feat-small reveal" style="transition-delay:.2s">
-        <div class="feat-icon2">%</div>
-        <h4>Manajemen Promo</h4>
-        <p>Buat kode promo diskon fleksibel. Kasir input kode — diskon terapkan otomatis ke total.</p>
+      <div class="feat-small blue-small reveal" style="transition-delay:.2s">
+        <div class="feat-icon2 blue-icon">📄</div>
+        <h4>Invoice Profesional &amp; Instan</h4>
+        <p>Buat invoice yang rapi dalam hitungan detik dengan template siap pakai. Kirim otomatis via email atau WhatsApp ke klien Anda.</p>
       </div>
-      <div class="feat-small reveal" style="transition-delay:.25s">
-        <div class="feat-icon2">📤</div>
-        <h4>Ekspor Data</h4>
-        <p>Export laporan transaksi dan inventaris untuk pembukuan dan analisis eksternal.</p>
+      <div class="feat-small blue-small reveal" style="transition-delay:.25s">
+        <div class="feat-icon2 blue-icon">🔔</div>
+        <h4>Reminder Tagihan Otomatis</h4>
+        <p>Jangan kejar klien secara manual lagi. Billmu mengirimkan pengingat pembayaran otomatis sebelum dan sesudah jatuh tempo.</p>
       </div>
     </div>
-    <div class="feat-big reveal" style="transition-delay:.1s">
+    <div class="feat-big blue-feat reveal" style="transition-delay:.1s">
       <div class="feat-top">
-        <div class="feat-icon2">🔐</div>
-        <span class="feat-num2">06</span>
+        <div class="feat-icon2 blue-icon">📈</div>
+        <span class="feat-num2">Billmu</span>
       </div>
       <div>
-        <h4>Multi-Role Terstruktur</h4>
-        <p>Administrator punya kendali penuh: stok, promo, laporan, ekspor, dan manajemen user. Kasir fokus pada transaksi harian. Setiap orang bekerja sesuai tanggung jawabnya.</p>
+        <h4>Lacak Pembayaran &amp; Arus Kas</h4>
+        <p>Pantau semua invoice — mana yang sudah dibayar, jatuh tempo, atau tertunggak — dari satu dashboard terpusat. Laporan arus kas memberi gambaran nyata kondisi keuangan bisnis Anda kapan saja.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- SCREENSHOTS -->
-<section class="screenshots" id="screenshots">
-  <div class="section-header reveal">
-    <div>
-      <span class="section-label">Screenshot POS Pro</span>
-      <h2 class="section-title">Tampilan aplikasi yang<br><em>siap dipakai</em></h2>
-    </div>
-    <p class="section-note">Calon pengguna bisa melihat langsung dashboard, kasir, stok, promo, dan halaman login sebelum mencoba aplikasi.</p>
-  </div>
-
-  <div class="ss-grid">
-    <div class="ss-card reveal">
-      <img src="assets/screenshots/login.png" alt="Tampilan login POS Pro Muwira">
-      <h4>Login</h4>
-      <p>Akses awal aplikasi dengan role pengguna yang terpisah.</p>
-    </div>
-
-    <div class="ss-card reveal" style="transition-delay:.05s">
-      <img src="assets/screenshots/dashboard.png" alt="Dashboard POS Pro Muwira">
-      <h4>Dashboard</h4>
-      <p>Ringkasan omzet, transaksi, stok, dan performa toko.</p>
-    </div>
-
-    <div class="ss-card reveal" style="transition-delay:.1s">
-      <img src="assets/screenshots/kasir.png" alt="Tampilan kasir POS Pro Muwira">
-      <h4>Kasir</h4>
-      <p>Proses transaksi harian dengan tampilan sederhana dan cepat.</p>
-    </div>
-
-    <div class="ss-card reveal" style="transition-delay:.15s">
-      <img src="assets/screenshots/promo.png" alt="Manajemen promo POS Pro Muwira">
-      <h4>Promo</h4>
-      <p>Kelola kode promo dan diskon untuk kebutuhan penjualan.</p>
-    </div>
-
-    <div class="ss-card reveal" style="transition-delay:.2s">
-      <img src="assets/screenshots/stok%20manajemen.png" alt="Manajemen stok POS Pro Muwira">
-      <h4>Manajemen Stok</h4>
-      <p>Pantau dan kelola stok barang agar operasional tetap rapi.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ROLES -->
-<section class="roles">
-  <div class="reveal">
-    <span class="section-label">Akses Pengguna</span>
-    <h2 class="section-title">Dua role,<br>satu sistem</h2>
-  </div>
-  <div class="roles-grid">
-    <div class="role-card r-admin reveal">
-      <div class="role-badge">
-        <div class="role-ava">AD</div>
-        <span class="role-badge-label">Administrator</span>
-      </div>
-      <h3>Kontrol Penuh</h3>
-      <p class="role-desc">Administrator memiliki akses ke semua modul sistem — dari manajemen produk hingga laporan bisnis.</p>
-      <ul class="role-perks">
-        <li><span class="perk-check">✓</span>Kelola produk &amp; inventaris stok</li>
-        <li><span class="perk-check">✓</span>Buat &amp; kelola kode promo diskon</li>
-        <li><span class="perk-check">✓</span>Lihat laporan omzet, laba &amp; HPP</li>
-        <li><span class="perk-check">✓</span>Ekspor data transaksi &amp; stok</li>
-        <li><span class="perk-check">✓</span>Manajemen akun kasir &amp; profil toko</li>
-      </ul>
-    </div>
-    <div class="role-card r-kasir reveal" style="transition-delay:.15s">
-      <div class="role-badge">
-        <div class="role-ava">KS</div>
-        <span class="role-badge-label">Kasir</span>
-      </div>
-      <h3>Fokus Transaksi</h3>
-      <p class="role-desc">Kasir mendapat antarmuka yang bersih dan sederhana — hanya yang dibutuhkan untuk melayani pelanggan.</p>
-      <ul class="role-perks">
-        <li><span class="perk-check">✓</span>Proses transaksi penjualan</li>
-        <li><span class="perk-check">✓</span>Input &amp; terapkan kode promo aktif</li>
-        <li><span class="perk-check">✓</span>Pilih metode pembayaran fleksibel</li>
-        <li><span class="perk-check">✓</span>Cetak struk &amp; riwayat transaksi</li>
-        <li><span class="perk-check">✓</span>Lihat ketersediaan stok produk</li>
-      </ul>
     </div>
   </div>
 </section>
@@ -886,22 +946,22 @@ footer {
     <div class="value-card reveal">
       <span class="value-no">01</span>
       <h4>Simple</h4>
-      <p>Mudah dipahami dan mudah digunakan. Teknologi tidak harus rumit untuk memberikan dampak besar.</p>
+      <p>Mudah dipahami dan digunakan. Teknologi tidak harus rumit untuk memberikan dampak besar pada bisnis Anda.</p>
     </div>
     <div class="value-card reveal" style="transition-delay:.1s">
       <span class="value-no">02</span>
       <h4>Flexible</h4>
-      <p>Dapat berkembang mengikuti kebutuhan pengguna. Setiap produk dirancang untuk terus tumbuh.</p>
+      <p>Berkembang mengikuti kebutuhan pengguna. Setiap produk dirancang untuk tumbuh bersama bisnis Anda.</p>
     </div>
     <div class="value-card reveal" style="transition-delay:.2s">
       <span class="value-no">03</span>
       <h4>Reliable</h4>
-      <p>Stabil dan dapat diandalkan. Beroperasi penuh secara offline tanpa bergantung koneksi internet.</p>
+      <p>Stabil dan dapat diandalkan. Produk kami dirancang dengan standar kualitas tinggi agar tidak mengecewakan saat dibutuhkan.</p>
     </div>
     <div class="value-card reveal" style="transition-delay:.3s">
       <span class="value-no">04</span>
       <h4>Continuous Creation</h4>
-      <p>Terus bereksperimen dan berkembang. Inovasi bukan tujuan akhir — ini cara kami bekerja.</p>
+      <p>Terus bereksperimen dan berkembang. Inovasi bukan tujuan akhir — ini cara kami bekerja setiap hari.</p>
     </div>
   </div>
 </section>
@@ -924,56 +984,89 @@ footer {
         <li>Mengembangkan software yang ringan dan mudah digunakan</li>
         <li>Membuat solusi yang berangkat dari kebutuhan nyata pengguna</li>
         <li>Menyediakan produk yang fleksibel dan dapat berkembang</li>
-        <li>Mendukung digitalisasi bisnis lokal dan UMKM</li>
+        <li>Mendukung digitalisasi bisnis lokal dan UMKM Indonesia</li>
         <li>Terus berinovasi melalui eksperimen dan pengembangan berkelanjutan</li>
       </ul>
     </div>
   </div>
 </section>
 
-
-<!-- FAQ -->
-<section class="faq" id="faq">
-  <div class="reveal" style="text-align:center; max-width:720px; margin:0 auto;">
-    <span class="section-label">FAQ</span>
-    <h2 class="section-title">Pertanyaan yang sering ditanyakan</h2>
+<!-- WAITLIST -->
+<section class="waitlist" id="waitlist">
+  <div class="reveal" style="text-align:center; max-width:680px; margin:0 auto;">
+    <span class="section-label">Billmu · Early Access</span>
+    <h2 class="section-title">Jadilah yang <em class="blue-em">pertama</em></h2>
+    <p style="color:var(--muted);font-size:.92rem;line-height:1.75;margin-top:16px;">Billmu sedang dalam pengembangan. Daftarkan diri Anda untuk mendapatkan notifikasi &amp; keuntungan eksklusif saat diluncurkan.</p>
   </div>
-  <div class="faq-wrap">
-    <div class="faq-item reveal">
-      <h4>Apakah POS Pro bisa dicoba dulu?</h4>
-      <p>Bisa. POS Pro menyediakan masa trial gratis selama 14 hari agar Anda dapat mencoba fitur kasir, produk, stok, laporan, dan operasional dasar sebelum membeli lisensi full.</p>
-    </div>
-    <div class="faq-item reveal" style="transition-delay:.05s">
-      <h4>Setelah trial habis, apa yang terjadi?</h4>
-      <p>Setelah masa trial berakhir, aplikasi akan meminta aktivasi lisensi. Anda tetap bisa mendapatkan lisensi full melalui tombol <a href="https://lynk.id/muwira_store/we37j1prv3rk" target="_blank" rel="noopener">Dapatkan Lisensi Full</a>.</p>
-    </div>
-    <div class="faq-item reveal" style="transition-delay:.1s">
-      <h4>Apakah POS Pro butuh internet?</h4>
-      <p>Tidak untuk penggunaan utama. POS Pro dirancang sebagai aplikasi desktop offline sehingga transaksi dan pengelolaan toko tetap bisa berjalan tanpa koneksi internet.</p>
-    </div>
-    <div class="faq-item reveal" style="transition-delay:.15s">
-      <h4>Untuk bisnis apa POS Pro paling cocok?</h4>
-      <p>POS Pro paling cocok untuk toko retail, toko kelontong, minimarket kecil, kios, butik, bakery, dan usaha dagang yang membutuhkan pencatatan transaksi, stok, promo, dan laporan sederhana.</p>
-    </div>
-    <div class="faq-item reveal" style="transition-delay:.2s">
-      <h4>Bagaimana cara mendapatkan lisensi full?</h4>
-      <p>Klik tombol <a href="https://lynk.id/muwira_store/we37j1prv3rk" target="_blank" rel="noopener">Dapatkan Lisensi Full</a>, selesaikan proses di Lynk, lalu ikuti instruksi aktivasi yang tersedia.</p>
+  <div class="waitlist-wrap">
+    <div class="waitlist-card reveal" style="border-color:rgba(59,130,246,0.15);">
+      <div class="wl-left">
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border:1px solid rgba(59,130,246,0.3);border-radius:100px;background:rgba(59,130,246,0.06);margin-bottom:20px;">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--blue2);animation:blink 2s infinite;"></span>
+          <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue2);font-weight:600;">Billmu — Dalam Pengembangan</span>
+        </div>
+        <h3>Daftar Waitlist Billmu</h3>
+        <p>Pengguna early access mendapatkan keistimewaan khusus yang tidak akan tersedia setelah peluncuran resmi.</p>
+        <ul class="wl-perks">
+          <li>Akses beta eksklusif sebelum publik</li>
+          <li>Diskon spesial untuk pengguna pertama</li>
+          <li>Prioritas onboarding &amp; dukungan langsung</li>
+          <li>Input langsung ke pengembangan fitur</li>
+          <li>Notifikasi peluncuran pertama kali</li>
+        </ul>
+      </div>
+      <div class="wl-right">
+        <form class="wl-form" id="wlForm">
+          <div class="form-group">
+            <label for="wl-name">Nama Lengkap *</label>
+            <input type="text" id="wl-name" placeholder="Nama bisnis atau pemilik" required>
+          </div>
+          <div class="form-group">
+            <label for="wl-email">Email *</label>
+            <input type="email" id="wl-email" placeholder="email@bisnis.com" required>
+          </div>
+          <div class="form-group">
+            <label for="wl-wa">Nomor WhatsApp *</label>
+            <input type="tel" id="wl-wa" placeholder="08xxxxxxxxxx" required>
+          </div>
+          <div class="form-group">
+            <label for="wl-biz">Jenis Bisnis *</label>
+            <select id="wl-biz" required>
+              <option value="" disabled selected>Pilih jenis bisnis...</option>
+              <option>Retail / Toko</option>
+              <option>Kafe / Restoran</option>
+              <option>Bakery / Pastry</option>
+              <option>Apotek</option>
+              <option>Salon / Barbershop</option>
+              <option>Butik / Fashion</option>
+              <option>Freelance / Jasa</option>
+              <option>Distributor / Grosir</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-gold" style="width:100%;justify-content:center;background:linear-gradient(90deg,var(--blue),var(--blue2));color:#fff;" id="wlSubmit">
+            ✉ Daftar Waitlist Billmu
+          </button>
+          <p class="wl-privacy">🔒 Kami menghormati privasi Anda. Tidak ada spam.</p>
+        </form>
+        <div class="wl-success" id="wlSuccess">
+          <div class="s-icon">🎉</div>
+          <h3>Berhasil Terdaftar!</h3>
+          <p>Terima kasih! Anda akan diarahkan ke WhatsApp Muwira. Kami akan segera menghubungi Anda saat Billmu siap.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta" id="cta">
+<section class="cta">
   <div class="cta-glow"></div>
   <div class="cta-inner reveal">
-    <h2>Siap mulai dengan<br><span>POS Pro?</span></h2>
-    <p>Bergabung dengan bisnis yang sudah lebih rapi, efisien, dan mudah dikelola bersama Muwira.</p>
+    <h2>Siap mulai dengan<br><span>Muwira Pos?</span></h2>
+    <p>Bergabung dengan bisnis yang sudah lebih rapi, efisien, dan mudah dikelola bersama Muwira. Coba gratis 14 hari, tanpa kartu kredit.</p>
     <div class="cta-btns">
-        <a href="https://github.com/reaperskull8-a11y/Muwira-Release/releases"
-     target="_blank"
-     class="btn-gold">
-    ⬇ Download Gratis 14 Hari
-  </a>
+      <a href="https://github.com/reaperskull8-a11y/Muwira-Release/releases" target="_blank" class="btn-gold">⬇ Download Gratis 14 Hari</a>
       <a href="https://lynk.id/muwira_store/we37j1prv3rk" target="_blank" rel="noopener" class="btn-ghost">Dapatkan Lisensi Full <span class="arrow">→</span></a>
     </div>
   </div>
@@ -1012,55 +1105,52 @@ const obs = new IntersectionObserver(entries=>{
 },{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// ── MODAL ──
-const modal     = document.getElementById('orderModal');
-const formWrap  = document.getElementById('formWrap');
-const successWrap = document.getElementById('successWrap');
-
-function openModal(){
-  modal.classList.add('active');
-  document.body.style.overflow='hidden';
-  formWrap.style.display='block';
-  successWrap.style.display='none';
+// ── PROGRESS BARS ──
+function animateProgress(barId, pctId, target) {
+  const bar = document.getElementById(barId);
+  const pct = document.getElementById(pctId);
+  if (!bar || !pct) return;
+  const barObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      bar.style.width = target + '%';
+      let current = 0;
+      const interval = setInterval(() => {
+        current += 1;
+        pct.textContent = current + '%';
+        if (current >= target) { clearInterval(interval); pct.textContent = target + '%'; }
+      }, 1500 / target);
+      barObs.disconnect();
+    }
+  }, { threshold: 0.3 });
+  barObs.observe(bar.closest('.status-card'));
 }
-function closeModal(){
-  modal.classList.remove('active');
-  document.body.style.overflow='';
-}
+animateProgress('pos-bar', 'pos-pct', 100);
+animateProgress('bill-bar', 'bill-pct', 40);
 
-document.querySelectorAll('.open-modal').forEach(btn=>btn.addEventListener('click',openModal));
-document.getElementById('closeModalBtn').addEventListener('click',closeModal);
-document.getElementById('cancelBtn').addEventListener('click',closeModal);
-modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
+// ── WAITLIST FORM ──
+document.getElementById('wlForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name  = document.getElementById('wl-name').value.trim();
+  const email = document.getElementById('wl-email').value.trim();
+  const wa    = document.getElementById('wl-wa').value.trim();
+  const biz   = document.getElementById('wl-biz').value;
 
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
-
-// ── FORM → WHATSAPP ──
-document.getElementById('submitBtn').addEventListener('click',()=>{
-  const name     = document.getElementById('name').value.trim();
-  const phone    = document.getElementById('phone').value.trim();
-  const business = document.getElementById('business').value;
-  const message  = document.getElementById('message').value.trim();
-
-  if(!name || !phone || !business){
-    alert('Mohon lengkapi nama, nomor WhatsApp, dan jenis bisnis.');
+  if (!name || !email || !wa || !biz) {
+    alert('Mohon lengkapi semua field yang wajib diisi.');
     return;
   }
 
-  const text = `Halo Muwira! 👋\n\nSaya tertarik dengan *POS Pro*.\n\n*Nama:* ${name}\n*No. WA:* ${phone}\n*Jenis Bisnis:* ${business}${message ? '\n*Pesan:* ' + message : ''}\n\nMohon informasi lebih lanjut. Terima kasih!`;
+  const text = `Halo Muwira! 👋\n\nSaya ingin mendaftar *Waitlist Billmu*.\n\n*Nama:* ${name}\n*Email:* ${email}\n*No. WA:* ${wa}\n*Jenis Bisnis:* ${biz}\n\nMohon informasikan saya saat Billmu siap diluncurkan. Terima kasih!`;
 
-  formWrap.style.display='none';
-  successWrap.style.display='block';
+  const btn = document.getElementById('wlSubmit');
+  btn.textContent = 'Mengirimkan...';
+  btn.disabled = true;
 
-  setTimeout(()=>{
-    window.open('https://wa.me/6285267333396?text='+encodeURIComponent(text),'_blank');
-    closeModal();
-    // reset
-    document.getElementById('name').value='';
-    document.getElementById('phone').value='';
-    document.getElementById('business').value='';
-    document.getElementById('message').value='';
-  }, 1200);
+  setTimeout(() => {
+    document.getElementById('wlForm').style.display = 'none';
+    document.getElementById('wlSuccess').classList.add('show');
+    window.open('https://wa.me/6285267333396?text=' + encodeURIComponent(text), '_blank');
+  }, 1000);
 });
 </script>
 </body>
